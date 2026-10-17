@@ -437,7 +437,16 @@ a.chip { text-decoration: none; color: inherit; }
   line-height: 18px; background: var(--line); color: var(--ink); }
 
 /* Game of the day: one wide card */
-.spot { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); overflow: hidden; text-decoration: none; color: inherit; margin-bottom: var(--s6); }
+.spot-wrap { position: relative; margin-bottom: var(--s6); }
+.spot { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); overflow: hidden; text-decoration: none; color: inherit; }
+.spot .game-art > img:first-child { animation: spot-in .35s ease both; }
+@keyframes spot-in { from { opacity: 0; } to { opacity: 1; } }
+.spot-nav { position: absolute; right: var(--s5); bottom: var(--s5); display: flex; align-items: center; gap: var(--s2); }
+.spot-btn { width: 40px; height: 40px; border-radius: 10px; border: var(--px) solid var(--edge); background: var(--card); color: var(--ink);
+  font-size: 14px; cursor: pointer; box-shadow: 3px 3px 0 0 var(--edge); }
+.spot-btn:hover { background: var(--line); }
+.spot-count { min-width: 56px; text-align: center; font-weight: 700; font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; }
+@media (max-width: 760px) { .spot-nav { right: var(--s4); bottom: var(--s4); } }
 .spot .game-art { border-bottom: 0; border-right: var(--px) solid var(--edge); }
 .spot .spot-body { display: flex; flex-direction: column; justify-content: center; gap: var(--s3); padding: var(--s5) var(--s6); }
 .spot-body .eyebrow { margin: 0; }

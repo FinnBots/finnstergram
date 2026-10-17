@@ -429,17 +429,37 @@
   var gotd = $('[data-gotd]');
   if (gotd) fetch('/assets/games.json').then(function (r) { if (!r.ok) throw new Error('games ' + r.status); return r.json(); }).then(function (list) {
     if (!list.length) return;
-    var g = list[Math.floor(Date.now() / 864e5) % list.length], art = $('.game-art', gotd);
-    gotd.href = g.url;
-    $('[data-gotd-label]', gotd).textContent = 'Game of the day';
-    $('[data-gotd-name]', gotd).textContent = g.name;
-    $('[data-gotd-desc]', gotd).textContent = g.desc;
-    $('[data-gotd-genre]', gotd).textContent = g.genre;
-    art.textContent = '';
-    var main = d.createElement('img');
-    if (g.shot) { main.className = 'shot'; main.src = g.shot; main.width = 640; main.height = 480; main.alt = g.name + ' gameplay'; }
-    else { main.className = 'px'; main.src = '/assets/bots/' + g.bot + '.png'; main.width = 512; main.height = 512; main.alt = 'Bot #' + g.bot + ', the star of ' + g.name; }
-    art.appendChild(main);                     // one picture per card: the game, no Bot badge (Founder, 2026-10-17)
+    /* today's game first, then every other game in list order — and it ROTATES (Founder 2026-10-17: "the hero game
+       needs to rotate to other games"). Pauses while hovered or focused, or when the tab is hidden; never moves by
+       itself for someone who turned motion off (the buttons still work). */
+    var start = Math.floor(Date.now() / 864e5) % list.length, at = 0, timer = null, held = false;
+    var order = list.slice(start).concat(list.slice(0, start));
+    var wrap = gotd.closest('[data-spot-wrap]') || gotd.parentNode, art = $('.game-art', gotd), count = $('[data-spot-count]', wrap);
+    function show(i) {
+      at = (i + order.length) % order.length;
+      var g = order[at];
+      gotd.href = g.url;
+      $('[data-gotd-label]', gotd).textContent = at === 0 ? 'Game of the day' : 'Spotlight';
+      $('[data-gotd-name]', gotd).textContent = g.name;
+      $('[data-gotd-desc]', gotd).textContent = g.desc;
+      $('[data-gotd-genre]', gotd).textContent = g.genre;
+      if (count) count.textContent = (at + 1) + ' / ' + order.length;
+      var img = new Image();
+      if (g.shot) { img.className = 'shot'; img.src = g.shot; img.width = 640; img.height = 480; img.alt = g.name + ' gameplay'; }
+      else { img.className = 'px'; img.src = '/assets/bots/' + g.bot + '.png'; img.width = 512; img.height = 512; img.alt = 'Bot #' + g.bot + ', the star of ' + g.name; }
+      var put = function () { art.textContent = ''; art.appendChild(img); };
+      if (img.complete) put(); else { img.onload = put; img.onerror = put; }
+      var nxt = new Image(); var n = order[(at + 1) % order.length]; nxt.src = n.shot || '/assets/bots/' + n.bot + '.png';   // preload the next one
+    }
+    function tick() { if (!held && !d.hidden) show(at + 1); }
+    function play() { if (!reduce && !timer) timer = setInterval(tick, 6000); }
+    function restart() { clearInterval(timer); timer = null; play(); }
+    var prev = $('[data-spot-prev]', wrap), next = $('[data-spot-next]', wrap);
+    if (prev) prev.addEventListener('click', function () { show(at - 1); restart(); });
+    if (next) next.addEventListener('click', function () { show(at + 1); restart(); });
+    ['mouseenter', 'focusin'].forEach(function (ev) { wrap.addEventListener(ev, function () { held = true; }); });
+    ['mouseleave', 'focusout'].forEach(function (ev) { wrap.addEventListener(ev, function () { held = false; }); });
+    show(0); play();
   }).catch(function () { /* the Featured pick stays */ });
   $$('.game[data-added]').forEach(function (el) {
     var t0 = Date.parse(el.dataset.added);
