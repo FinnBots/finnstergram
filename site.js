@@ -96,7 +96,7 @@
     }
     var screen = $('.screen', hero), img = $('.screen img', hero), badge = $('.badge', hero),
         bubble = $('.bubble', hero), botBtn = $('.bot-btn', hero), meet = $('[data-meet-link]', hero);
-    var LINES = ['Beep boop!', 'Built for fun.', 'Hello, human!', 'Got $OIL?', 'Play a game with me!', 'Boop!', 'Hi Finn!'];
+    var LINES = ['Beep boop!', 'Built for fun.', 'Hello, human!', 'Pick a game!', 'Play a game with me!', 'Boop!', 'Hi Finn!'];
     var bubbleTimer;
     function say(text) {
       if (!bubble) return;
@@ -258,6 +258,7 @@
       if (e.key === 'ArrowRight') { e.preventDefault(); step(1); }
       if (e.key === 'ArrowLeft') { e.preventDefault(); step(-1); }
     });
+    d.addEventListener('fb:finder', function (e) { go(e.detail); finder.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' }); });
     var q = new URLSearchParams(location.search).get('bot') || (location.hash.match(/^#bot-(\d+)$/) || [])[1];
     go(q || 2969, !!q);
     if (q) setTimeout(function () { finder.scrollIntoView({ block: 'start' }); }, 60);
@@ -344,7 +345,8 @@
           else if (state.sort === 'common') list.sort(function (a, b) { return b[1] - a[1]; });
           else list.sort(function (a, b) { return a[0] - b[0]; });
           var filtered = state.ed !== 'all' || state.q.length || state.f.some(function (x) { return x >= 0; });
-          countEl.textContent = list.length ? (fmt(list.length) + (filtered ? ' Bot' + (list.length === 1 ? '' : 's') + ' match' : ' Bots in the collection — search or filter to narrow it down'))
+          countEl.textContent = list.length ? (fmt(list.length) + (filtered ? ' Bot' + (list.length === 1 ? '' : 's') + ' match'
+                                            : ' Bots on-chain today (of the original 3,000 — some were burned). Search or filter to narrow it down.'))
                                             : 'No Bot matches that — try fewer words or clear a filter.';
           grid.textContent = '';
           list.slice(0, state.limit).forEach(function (row) {
@@ -372,7 +374,8 @@
             selects.forEach(function (sel, kk) { sel.value = String(state.f[kk]); sel.classList.toggle('on', state.f[kk] >= 0); });
             state.limit = 48; run(); ex.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
           });
-          $('[data-ex-d-big]', dialog).href = '/showcase/?bot=' + n + '#finder';
+          var big = $('[data-ex-d-big]', dialog); big.href = '/showcase/?bot=' + n + '#finder';
+          big.onclick = $('[data-finder]') ? function (e) { e.preventDefault(); close(); d.dispatchEvent(new CustomEvent('fb:finder', { detail: n })); } : null;
           var me = $('[data-ex-d-me]', dialog); me.hidden = true;
           botMints().then(function (m) { if (m[n]) { me.href = 'https://magiceden.io/item-details/' + m[n]; me.hidden = false; } });
           var scr = $('.screen', dialog), img = $('[data-ex-d-img]', dialog);
@@ -402,33 +405,46 @@
           selects.forEach(function (sel) { sel.value = '-1'; sel.classList.remove('on'); });
           $$('[data-ex-ed]', ex).forEach(function (o) { o.setAttribute('aria-pressed', String(o.dataset.exEd === 'all')); }); run();
         });
+        var q0 = new URLSearchParams(location.search).get('q');
+        if (q0) { input.value = q0; state.q = q0.toLowerCase().split(/[\s,]+/).filter(Boolean); }
         run();
+        if (q0) setTimeout(function () { ex.scrollIntoView({ block: 'start' }); }, 60);
       }).catch(function (err) {
         if (window.console) console.error('Bot search:', err);
         var c = $('[data-ex-count]', ex); if (c) c.textContent = 'The Bot search could not load — check your connection and reload.';
       });
     };
-    if ('IntersectionObserver' in window) {
+    if (new URLSearchParams(location.search).get('q')) startExplorer();
+    else if ('IntersectionObserver' in window) {
       var exio = new IntersectionObserver(function (es) { if (es.some(function (e) { return e.isIntersecting; })) { exio.disconnect(); startExplorer(); } }, { rootMargin: '600px 0px' });
       exio.observe(ex);
     } else startExplorer();
     $('input[type=search]', ex).addEventListener('focus', startExplorer);
   }
 
-  /* ---- Games: filter chips (every game is listed without the script) ------------ */
-  var gamesGrid = $('[data-games]');
-  if (gamesGrid) {
-    var chips = $$('.chip[data-filter]');
-    chips.forEach(function (c) {
-      c.addEventListener('click', function () {
-        var f = c.dataset.filter;
-        chips.forEach(function (o) { o.setAttribute('aria-pressed', String(o === c)); });
-        $$('.game', gamesGrid).forEach(function (g) {
-          g.hidden = f !== 'all' && (' ' + g.dataset.flags + ' ').indexOf(' ' + f + ' ') < 0;
-        });
-      });
-    });
-  }
+  /* ---- Games: the Game of the day and "New" badges ------------------------------ */
+  /* Every card is in the page without the script. The page carries a fixed Featured pick; this turns it
+     into today's Game of the day — the same game for everyone on a UTC day, from /assets/games.json. */
+  var gotd = $('[data-gotd]');
+  if (gotd) fetch('/assets/games.json').then(function (r) { if (!r.ok) throw new Error('games ' + r.status); return r.json(); }).then(function (list) {
+    if (!list.length) return;
+    var g = list[Math.floor(Date.now() / 864e5) % list.length], art = $('.game-art', gotd);
+    gotd.href = g.url;
+    $('[data-gotd-label]', gotd).textContent = 'Game of the day';
+    $('[data-gotd-name]', gotd).textContent = g.name;
+    $('[data-gotd-desc]', gotd).textContent = g.desc;
+    $('[data-gotd-genre]', gotd).textContent = g.genre;
+    art.textContent = '';
+    var main = d.createElement('img');
+    if (g.shot) { main.className = 'shot'; main.src = g.shot; main.width = 640; main.height = 480; main.alt = g.name + ' gameplay'; }
+    else { main.className = 'px'; main.src = '/assets/bots/' + g.bot + '.png'; main.width = 512; main.height = 512; main.alt = 'Bot #' + g.bot + ', the star of ' + g.name; }
+    art.appendChild(main);
+    if (g.shot) { var b = d.createElement('img'); b.className = 'game-bot px'; b.src = '/assets/bots/' + g.bot + '.png'; b.width = 512; b.height = 512; b.alt = ''; b.setAttribute('aria-hidden', 'true'); art.appendChild(b); }
+  }).catch(function () { /* the Featured pick stays */ });
+  $$('.game[data-added]').forEach(function (el) {
+    var t0 = Date.parse(el.dataset.added);
+    if (t0 && Date.now() - t0 < 14 * 864e5) { var s = d.createElement('span'); s.className = 'new-tag'; s.textContent = 'New'; $('.game-art', el).appendChild(s); }
+  });
 
   /* ---- copy buttons (the $OIL mint) ----------------------------------------------- */
   $$('[data-copy]').forEach(function (b) {

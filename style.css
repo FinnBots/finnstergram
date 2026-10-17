@@ -122,6 +122,12 @@ html:not(.js) .theme-switch { display: none; }          /* it needs the script; 
   .nav ul { padding: 0 16px 10px; }
   .nav a { padding: 7px 12px; font-size: 14.5px; }
 }
+@media (max-width: 560px) {                           /* four items fit a phone: share the row, nothing scrolled off */
+  .nav { -webkit-mask-image: none; mask-image: none; overflow: visible; }
+  .nav ul { justify-content: space-between; gap: 4px; }
+  .nav li { flex: 1; }
+  .nav a { text-align: center; padding: 8px 6px; font-size: 15px; }
+}
 
 /* ---- pixel panels + buttons -------------------------------------------------- */
 .panel { background: var(--card); border: var(--px) solid var(--edge); border-radius: 14px;
@@ -412,25 +418,80 @@ html.js .no-js-only { display: none; }
 @media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .ed { grid-template-columns: 72px 1fr; } .ed img { width: 72px; } }
 
-/* ---- Games (finnstergram.com/games/, the Games page)            ------------- */
-.game-count { color: var(--muted); margin: 0 0 var(--s4); font-weight: 600; }
-.game-count b { color: var(--ink); }
+/* ---- Games (the Games page + the home page's Play now)                       ---- */
+/* design review 2026-10-17: a card shows the GAME (a gameplay shot) with its Bot as a badge, a name and one
+   line. Compact on purpose — two columns on a phone, so 37 games are a few screens, not 29. */
 .chip b { font-weight: 700; opacity: .65; margin-left: 4px; }
-.games-grid { display: grid; gap: var(--s5); grid-template-columns: repeat(auto-fill, minmax(min(100%, 250px), 1fr)); align-items: stretch; }
-.game { display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; height: 100%; }
-.game-art { display: block; border: 0; border-radius: 0; box-shadow: none; border-bottom: var(--px) solid var(--edge); }
-.game-body { flex: 1; display: flex; flex-direction: column; gap: var(--s2); padding: var(--s4) var(--s5) var(--s5); }
-.game-tags { display: flex; flex-wrap: wrap; gap: 6px; min-height: 22px; }
-.gtag { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px; line-height: 18px; }
-.gtag.free { background: var(--line); color: var(--ink); }
-.gtag.oil { background: var(--amber); color: #2a2230; }
-.gtag.live { background: var(--ok-bg); color: var(--ok); }
-.game-name { font: 32px/1 var(--font-display); color: var(--heading); margin-top: 2px; }
-.game-desc { color: var(--muted); font-size: 15.5px; line-height: 1.45; }
-.game .more { margin-top: auto; padding-top: var(--s2); }
-.game:hover .game-art img, .game:focus-visible .game-art img { transform: translateY(-3px) scale(1.02); }
-.game-art img { transition: transform .2s; }
-.game[hidden] { display: none; }
+a.chip { text-decoration: none; color: inherit; }
+.games-grid { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); align-items: stretch; }
+.game { display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; height: 100%; box-shadow: var(--shadow-sm); }
+.game-art { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--screen); border-bottom: var(--px) solid var(--edge); }
+.game-art > img:first-child { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
+.game-art .game-bot { position: absolute; right: 8px; bottom: 8px; width: 40px; height: 40px; border-radius: 9px;
+  border: 2px solid var(--edge); background: var(--cyan); box-shadow: 2px 2px 0 0 var(--edge); }
+.new-tag { position: absolute; left: 8px; top: 8px; background: var(--amber); color: #2a2230; border: 2px solid var(--edge);
+  font: 18px/1 var(--font-display); padding: 2px 8px 3px; border-radius: 6px; box-shadow: 2px 2px 0 0 var(--edge); }
+.game-body { flex: 1; display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3) var(--s4) var(--s4); }
+.game-name { font: 28px/1 var(--font-display); color: var(--heading); }
+.game-desc { color: var(--muted); font-size: 14.5px; line-height: 1.4; }
+.game:hover .game-art > img:first-child, .game:focus-visible .game-art > img:first-child { transform: scale(1.04); }
+.gtag { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
+  line-height: 18px; background: var(--line); color: var(--ink); }
+
+/* Game of the day: one wide card */
+.spot { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); overflow: hidden; text-decoration: none; color: inherit; margin-bottom: var(--s6); }
+.spot .game-art { border-bottom: 0; border-right: var(--px) solid var(--edge); }
+.spot .game-art .game-bot { width: 64px; height: 64px; right: 12px; bottom: 12px; border-radius: 12px; }
+.spot-body { display: flex; flex-direction: column; justify-content: center; gap: var(--s3); padding: var(--s5) var(--s6); }
+.spot-body .eyebrow { margin: 0; }
+.spot-name { font: clamp(40px, 5vw, 58px)/1 var(--font-display); color: var(--heading); }
+.spot-desc { font-size: 18px; color: var(--ink); max-width: 34ch; }
+.spot-meta { display: flex; flex-wrap: wrap; gap: 6px; }
+.spot .btn { align-self: flex-start; margin-top: var(--s2); }
+.spot:hover .game-art > img:first-child { transform: scale(1.03); }
+@media (max-width: 760px) {
+  .spot { grid-template-columns: 1fr; }
+  .spot .game-art { border-right: 0; border-bottom: var(--px) solid var(--edge); }
+  .spot-body { padding: var(--s4) var(--s5) var(--s5); }
+  .spot-desc { font-size: 16px; }
+}
+
+/* shelves */
+.shelf-jump { margin: 0 0 var(--s6); }
+.shelf { scroll-margin-top: 140px; }
+.shelf + .shelf { margin-top: var(--s7); }
+.shelf-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2) var(--s4); margin-bottom: var(--s4); }
+.shelf-title { font-size: clamp(34px, 4.5vw, 46px); }
+.shelf-head p { margin: 0; color: var(--muted); }
+.games-sec { padding-top: var(--s5); }
+.play-now { padding-top: var(--s2); }
+.games-grid-home { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 960px) { .games-grid-home { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* phones: two columns of compact cards */
+@media (max-width: 560px) {
+  .games-grid, .games-grid-home { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s3); }
+  .game-body { padding: var(--s2) var(--s3) var(--s3); }
+  .game-name { font-size: 22px; }
+  .game-desc { font-size: 13px; }
+  .game-art .game-bot { width: 30px; height: 30px; right: 6px; bottom: 6px; border-radius: 7px; }
+  .new-tag { font-size: 15px; left: 6px; top: 6px; }
+}
+
+/* the grown-ups' zone: set apart from the free arcade */
+.grownups { border-top-style: dashed; }
+.oil-safe .more { display: inline-block; margin-top: var(--s4); }
+.oil-safe p + p { margin-top: var(--s3); }
+
+/* home: stats, Find a Bot teaser; Bots: buy */
+.stat-new { text-decoration: none; color: inherit; }
+.stat-new b { font-size: clamp(30px, 4vw, 42px); word-break: break-word; }
+.find-teaser { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s6); align-items: center; }
+.find-teaser .section-sub { margin-bottom: 0; }
+.buy { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); }
+.buy .section-sub { margin-bottom: 0; }
+.buy .cta { margin-top: 0; }
+@media (max-width: 760px) { .find-teaser { grid-template-columns: 1fr; } }
 .oil-safe { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s6); align-items: center; }
 .oil-safe p { margin: 0; font-size: 18px; }
 .mint-card { padding: var(--s5); display: grid; gap: var(--s3); }
@@ -465,6 +526,7 @@ html.js .no-js-only { display: none; }
 .ex-box:focus-within { outline: 3px solid var(--amber); outline-offset: 2px; }
 .ex-editions { margin: 0; }
 .ex-filters { display: grid; gap: var(--s3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); }
+@media (max-width: 560px) { .ex-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--s2) var(--s3); } .ex-filters select { min-width: 0; width: 100%; } }
 .ex-filters label, .ex-sort { display: grid; gap: 4px; font-size: 12.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
 .ex-filters select, .ex-sort select { font: 600 15px/1.2 var(--font-body); color: var(--ink); background: var(--card); border: 2px solid var(--edge);
   border-radius: 10px; padding: 9px 10px; text-transform: none; letter-spacing: 0; min-width: 0; }
