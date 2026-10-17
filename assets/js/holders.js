@@ -1,4 +1,4 @@
-/* finnstergram.com/holders/ — the Holder Dashboard (replaces holders.finnstergram.com, 2026-10-17).
+/* finnstergram.com/holders/ — the Holder Dashboard (2026-10-17).
    READ-ONLY: connects a Phantom wallet and reads balances through the FinnBots RPC Worker. It never
    builds, signs or sends a transaction.
    Hardened vs the old page:

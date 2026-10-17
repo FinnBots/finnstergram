@@ -412,7 +412,7 @@ html.js .no-js-only { display: none; }
 @media (max-width: 860px) { .story { grid-template-columns: 1fr; } }
 @media (max-width: 420px) { .ed { grid-template-columns: 72px 1fr; } .ed img { width: 72px; } }
 
-/* ---- Games (finnstergram.com/games/, replaces games.finnstergram.com) ------------- */
+/* ---- Games (finnstergram.com/games/, the Games page)            ------------- */
 .game-count { color: var(--muted); margin: 0 0 var(--s4); font-weight: 600; }
 .game-count b { color: var(--ink); }
 .chip b { font-weight: 700; opacity: .65; margin-left: 4px; }
@@ -437,7 +437,7 @@ html.js .no-js-only { display: none; }
 .mint-card code { font: 600 15px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; word-break: break-all; background: var(--bg); border: 2px dashed var(--line); border-radius: 10px; padding: var(--s3); color: var(--ink); }
 @media (max-width: 760px) { .oil-safe { grid-template-columns: 1fr; } }
 
-/* ---- Holder Dashboard (finnstergram.com/holders/, replaces holders.finnstergram.com) ---- */
+/* ---- Holder Dashboard (finnstergram.com/holders/, the Holder Dashboard)       ---- */
 .wallet-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s4) var(--s5); }
 .wallet-state { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3); }
 .dot-status { display: inline-flex; align-items: center; gap: 8px; font-weight: 700; color: var(--muted); }
