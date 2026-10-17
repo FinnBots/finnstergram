@@ -6,6 +6,18 @@
   'use strict';
   var d = document, root = d.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---- never show an old page ---------------------------------------------------- */
+  /* GitHub Pages lets a browser keep a page for 10 minutes, so right after a publish a visitor could see the
+     previous build. Each page names its build; /assets/build.json (fetched uncached) names the live one. If they
+     differ, reload ONCE (a reload revalidates the page). The session guard means it can never loop. */
+  var myBuild = (d.querySelector('meta[name="fb-build"]') || {}).content;
+  if (myBuild && window.fetch) fetch('/assets/build.json', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+    if (!j || !j.build || j.build === myBuild) return;
+    var key = 'fb-reloaded-' + j.build;
+    try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, '1'); } catch (e) { return; }   // no storage: never risk a loop
+    location.reload();
+  }).catch(function () {});
   var $ = function (s, el) { return (el || d).querySelector(s); };
   var $$ = function (s, el) { return Array.prototype.slice.call((el || d).querySelectorAll(s)); };
 
