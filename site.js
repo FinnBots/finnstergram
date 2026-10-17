@@ -131,6 +131,7 @@
       chosen.forEach(function (n) {
         var a = d.createElement('a');
         a.href = '/showcase/?bot=' + n + '#finder';
+        if ($('[data-finder]')) a.addEventListener('click', function (e) { e.preventDefault(); d.dispatchEvent(new CustomEvent('fb:finder', { detail: n })); });   // same page: no reload
         if (copy) { a.setAttribute('aria-hidden', 'true'); a.tabIndex = -1; }
         else a.setAttribute('aria-label', 'Meet Bot #' + n);
         a.innerHTML = '<img class="px" loading="lazy" width="92" height="92" alt="" src="' + ix.base + '/' + n + '.png"><span>#' + n + '</span>';
