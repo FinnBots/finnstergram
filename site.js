@@ -438,8 +438,7 @@
     var main = d.createElement('img');
     if (g.shot) { main.className = 'shot'; main.src = g.shot; main.width = 640; main.height = 480; main.alt = g.name + ' gameplay'; }
     else { main.className = 'px'; main.src = '/assets/bots/' + g.bot + '.png'; main.width = 512; main.height = 512; main.alt = 'Bot #' + g.bot + ', the star of ' + g.name; }
-    art.appendChild(main);
-    if (g.shot) { var b = d.createElement('img'); b.className = 'game-bot px'; b.src = '/assets/bots/' + g.bot + '.png'; b.width = 512; b.height = 512; b.alt = ''; b.setAttribute('aria-hidden', 'true'); art.appendChild(b); }
+    art.appendChild(main);                     // one picture per card: the game, no Bot badge (Founder, 2026-10-17)
   }).catch(function () { /* the Featured pick stays */ });
   $$('.game[data-added]').forEach(function (el) {
     var t0 = Date.parse(el.dataset.added);

@@ -419,7 +419,7 @@ html.js .no-js-only { display: none; }
 @media (max-width: 420px) { .ed { grid-template-columns: 72px 1fr; } .ed img { width: 72px; } }
 
 /* ---- Games (the Games page + the home page's Play now)                       ---- */
-/* design review 2026-10-17: a card shows the GAME (a gameplay shot) with its Bot as a badge, a name and one
+/* design review 2026-10-17: a card shows the GAME (one gameplay shot, no Bot badge), a name and one
    line. Compact on purpose — two columns on a phone, so 37 games are a few screens, not 29. */
 .chip b { font-weight: 700; opacity: .65; margin-left: 4px; }
 a.chip { text-decoration: none; color: inherit; }
@@ -427,8 +427,6 @@ a.chip { text-decoration: none; color: inherit; }
 .game { display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; height: 100%; box-shadow: var(--shadow-sm); }
 .game-art { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--screen); border-bottom: var(--px) solid var(--edge); }
 .game-art > img:first-child { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
-.game-art .game-bot { position: absolute; right: 8px; bottom: 8px; width: 40px; height: 40px; border-radius: 9px;
-  border: 2px solid var(--edge); background: var(--cyan); box-shadow: 2px 2px 0 0 var(--edge); }
 .new-tag { position: absolute; left: 8px; top: 8px; background: var(--amber); color: #2a2230; border: 2px solid var(--edge);
   font: 18px/1 var(--font-display); padding: 2px 8px 3px; border-radius: 6px; box-shadow: 2px 2px 0 0 var(--edge); }
 .game-body { flex: 1; display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3) var(--s4) var(--s4); }
@@ -441,8 +439,7 @@ a.chip { text-decoration: none; color: inherit; }
 /* Game of the day: one wide card */
 .spot { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); overflow: hidden; text-decoration: none; color: inherit; margin-bottom: var(--s6); }
 .spot .game-art { border-bottom: 0; border-right: var(--px) solid var(--edge); }
-.spot .game-art .game-bot { width: 64px; height: 64px; right: 12px; bottom: 12px; border-radius: 12px; }
-.spot-body { display: flex; flex-direction: column; justify-content: center; gap: var(--s3); padding: var(--s5) var(--s6); }
+.spot .spot-body { display: flex; flex-direction: column; justify-content: center; gap: var(--s3); padding: var(--s5) var(--s6); }
 .spot-body .eyebrow { margin: 0; }
 .spot-name { font: clamp(40px, 5vw, 58px)/1 var(--font-display); color: var(--heading); }
 .spot-desc { font-size: 18px; color: var(--ink); max-width: 34ch; }
@@ -465,8 +462,25 @@ a.chip { text-decoration: none; color: inherit; }
 .shelf-head p { margin: 0; color: var(--muted); }
 .games-sec { padding-top: var(--s5); }
 .play-now { padding-top: var(--s2); }
-.games-grid-home { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.games-grid-home { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 @media (max-width: 960px) { .games-grid-home { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* ---- home (design pass: one job per section) ---------------------------------- */
+.section-head .eyebrow { margin-bottom: var(--s2); }
+.home-play { padding-top: clamp(var(--s6), 5vw, var(--s8)); }
+.facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s3); margin: var(--s2) 0 0; }
+.facts div { border-top: var(--px) solid var(--edge); padding-top: var(--s3); }
+.facts dt { font: clamp(36px, 4.5vw, 48px)/1 var(--font-display); color: var(--heading); }
+.facts dd { margin: var(--s1) 0 0; color: var(--muted); font-size: 14.5px; font-weight: 600; }
+.home-search { max-width: 720px; margin-bottom: var(--s6); }
+.links { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--s4); }
+.link-card { display: grid; grid-template-columns: 72px 1fr; gap: var(--s4); align-items: center; padding: var(--s3) var(--s4) var(--s3) var(--s3);
+  text-decoration: none; color: inherit; box-shadow: var(--shadow-sm); }
+.link-card img { width: 72px; height: 72px; object-fit: cover; border-radius: var(--radius-sm); border: 2px solid var(--edge); }
+.link-card b { display: block; font: 28px/1 var(--font-display); color: var(--heading); margin-bottom: 4px; }
+.link-card span span { color: var(--muted); font-size: 15px; line-height: 1.4; }
+@media (max-width: 860px) { .links { grid-template-columns: 1fr; } }
+@media (max-width: 420px) { .facts dd { font-size: 13px; } }
 
 /* phones: two columns of compact cards */
 @media (max-width: 560px) {
@@ -474,8 +488,7 @@ a.chip { text-decoration: none; color: inherit; }
   .game-body { padding: var(--s2) var(--s3) var(--s3); }
   .game-name { font-size: 22px; }
   .game-desc { font-size: 13px; }
-  .game-art .game-bot { width: 30px; height: 30px; right: 6px; bottom: 6px; border-radius: 7px; }
-  .new-tag { font-size: 15px; left: 6px; top: 6px; }
+    .new-tag { font-size: 15px; left: 6px; top: 6px; }
 }
 
 /* the grown-ups' zone: set apart from the free arcade */
