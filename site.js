@@ -10,7 +10,19 @@
   var $$ = function (s, el) { return Array.prototype.slice.call((el || d).querySelectorAll(s)); };
 
   /* ---- night mode -------------------------------------------------------------- */
+  /* SHARED with every game (2026-10-17): one cookie on .finnstergram.com, so night mode set here carries
+     into the games and back — the same rule as factory/templates/theme-switch.js. localStorage is the fallback. */
   var KEY = 'fb-theme', sys = window.matchMedia('(prefers-color-scheme: dark)');
+  function savedTheme() {
+    var m = /(?:^|;\s*)fb-theme=(light|dark)(?:;|$)/.exec(d.cookie || ''); if (m) return m[1];
+    try { var t = localStorage.getItem(KEY); if (t === 'light' || t === 'dark') return t; } catch (e) {}
+    return null;
+  }
+  function saveTheme(v) {
+    var dom = /(^|\.)finnstergram\.com$/.test(location.hostname) ? '; Domain=finnstergram.com' : '';
+    d.cookie = KEY + '=' + v + '; Path=/; Max-Age=31536000; SameSite=Lax' + dom + (location.protocol === 'https:' ? '; Secure' : '');
+    try { localStorage.setItem(KEY, v); } catch (e) { /* private mode: the cookie still carries it */ }
+  }
   var effective = function () { return root.dataset.theme || (sys.matches ? 'dark' : 'light'); };
   function paintTheme() {
     var dark = effective() === 'dark';
@@ -24,11 +36,14 @@
     b.addEventListener('click', function () {
       var next = effective() === 'dark' ? 'light' : 'dark';
       root.dataset.theme = next;
-      try { localStorage.setItem(KEY, next); } catch (e) { /* private mode: the switch still works this visit */ }
+      saveTheme(next);
       paintTheme();
     });
   });
   (sys.addEventListener ? sys.addEventListener('change', paintTheme) : sys.addListener(paintTheme));
+  function resyncTheme() { var t = savedTheme(); if (t) root.dataset.theme = t; paintTheme(); }   // changed in a game tab
+  d.addEventListener('visibilitychange', function () { if (!d.hidden) resyncTheme(); });
+  window.addEventListener('pageshow', resyncTheme);
   paintTheme();
 
   /* ---- the Bot index: only Bots that are on-chain AND pictured on Arweave -------- */
