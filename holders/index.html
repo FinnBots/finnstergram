@@ -4,7 +4,7 @@
 <!-- fb:head {"title": "Holder Dashboard | FinnBots", "desc": "Connect your wallet to see your $OIL balance, your FinnBots and what they earn each day. Read-only: nothing is ever signed.", "path": "holders/", "scripts": ["/assets/js/phantom-deeplink-libs.min.js", "/assets/js/phantom-mobile.js", "/assets/js/holders.js"]} -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI='; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Holder Dashboard | FinnBots</title>
 <meta name="description" content="Connect your wallet to see your $OIL balance, your FinnBots and what they earn each day. Read-only: nothing is ever signed.">
@@ -34,6 +34,7 @@
 <script src="/assets/js/phantom-deeplink-libs.min.js" defer></script>
 <script src="/assets/js/phantom-mobile.js" defer></script>
 <script src="/assets/js/holders.js" defer></script>
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b11bf18cfe07453484c01ca2d417e772"}'></script>
 <!-- /fb:head -->
 </head>
 <body>
@@ -136,7 +137,7 @@
 <li><a href="https://x.com/FinnBots">X</a></li>
 <li><a href="https://discord.gg/fAHCyckqyn">Discord</a></li>
 </ul></nav>
-<small>Copyright © 2026 Bots - All Rights Reserved.</small>
+<small>Copyright © 2026 Bots - All Rights Reserved. Visits are counted with Cloudflare Web Analytics: no tracking cookies, nothing that identifies you.</small>
 </div></footer>
 <!-- /fb:footer -->
 </body>
