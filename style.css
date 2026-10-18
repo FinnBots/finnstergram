@@ -630,6 +630,10 @@ a.chip { text-decoration: none; color: inherit; }
 .gp-how { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--s6); align-items: start; }
 .gp-how .big { font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55; margin: 0; max-width: 52ch; }
 .gp-rules { font-size: 17px; line-height: 1.6; max-width: 62ch; }
+.gp-rules .big { margin-bottom: var(--s4); }
+.gp-full { color: var(--muted); margin: 0; }
+.gp-full a { color: var(--link); font-weight: 700; text-decoration: none; white-space: nowrap; }
+.gp-full a:hover { text-decoration: underline; }
 .gp-rules p { margin: 0 0 var(--s3); }
 .gp-rules ul { margin: 0 0 var(--s4); padding-left: 22px; display: grid; gap: var(--s2); }
 .gp-rules b, .gp-rules strong { color: var(--heading); }
