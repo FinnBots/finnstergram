@@ -139,6 +139,7 @@ html:not(.js) .theme-switch { display: none; }          /* it needs the script; 
 .btn:active { transform: translate(3px, 3px); box-shadow: 1px 1px 0 0 var(--edge); }
 .btn-amber { background: var(--amber); color: #2a2230; }
 .btn-plain { background: var(--card); color: var(--ink); }
+.btn-off, .btn-off:hover, .btn-off:active { opacity: .5; cursor: default; transform: none; box-shadow: none; }
 .btn-sm { padding: 8px 14px; font-size: 14.5px; border-radius: 10px; }
 .btn svg { width: 18px; height: 18px; flex: none; }
 
@@ -427,11 +428,9 @@ html.js .no-js-only { display: none; }
 a.chip { text-decoration: none; color: inherit; }
 .games-grid { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); align-items: stretch; }
 .game { display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; height: 100%; box-shadow: var(--shadow-sm); }
-.game-play { flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
-.game-more { display: flex; align-items: center; min-height: 40px; padding: 0 var(--s4) var(--s2); font-size: 13.5px; font-weight: 700;
-  color: var(--link); text-decoration: none; }
-.game-more:hover { text-decoration: underline; }
-@media (max-width: 560px) { .game-more { padding: 0 var(--s3) var(--s1); font-size: 12.5px; } }
+.game-open { flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.game-quick { align-self: flex-start; white-space: nowrap; margin: 0 var(--s4) var(--s3); padding: 6px 12px; font-size: 13.5px; }
+@media (max-width: 560px) { .game-quick { margin: 0 var(--s3) var(--s2); padding: 5px 10px; font-size: 12.5px; } }
 .game-art { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--screen); border-bottom: var(--px) solid var(--edge); }
 .game-art > img:first-child { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
 .new-tag { position: absolute; left: 8px; top: 8px; background: var(--amber); color: #2a2230; border: 2px solid var(--edge);

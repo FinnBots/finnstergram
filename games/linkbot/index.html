@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="fb-build" content="904cd2287deb">
+<meta name="fb-build" content="36f93c2c0fc6">
 <title>LINKBOT — free puzzles game — FinnBots</title>
 <meta name="description" content="Join every pair of plugs and fill the whole board. Free to play in your browser on a laptop, tablet or phone — no download, no sign-up.">
 <link rel="canonical" href="https://finnstergram.com/games/linkbot/">
@@ -29,7 +29,7 @@
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jersey15-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=c5357d3f83">
+<link rel="stylesheet" href="/style.css?v=2027c4923a">
 <script>document.documentElement.classList.add('js');var m=/(?:^|;\s*)fb-theme=(light|dark)(?:;|$)/.exec(document.cookie||''),t=m&&m[1];if(!t)try{t=localStorage.getItem('fb-theme')}catch(e){}if(t==='light'||t==='dark')document.documentElement.dataset.theme=t</script>
 <script src="/site.js?v=33073c2be5" defer></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b11bf18cfe07453484c01ca2d417e772"}'></script>
@@ -60,7 +60,7 @@
           <p class="eyebrow"><span class="blink" aria-hidden="true"></span>Puzzles &amp; board games · free to play</p>
           <h1 id="gp-title">LINKBOT</h1>
           <p class="lede">Join every pair of plugs and fill the whole board.</p>
-          <div class="cta"><a class="btn btn-amber" href="https://linkbot.finnstergram.com">Play LINKBOT</a></div>
+          <div class="cta"><a class="btn btn-amber" href="https://linkbot.finnstergram.com">Play LINKBOT</a><span class="btn btn-plain btn-off" aria-disabled="true">Leaderboard opens soon</span></div>
           <p class="gp-note">Plays in your browser on a laptop, tablet or phone. No download, no sign-up.</p>
         </div>
       </div>
@@ -81,13 +81,23 @@
     </div>
   </section>
 
+  <section class="section" aria-labelledby="gp-board">
+    <div class="wrap gp-boardrow">
+      <div>
+        <h2 class="section-title" id="gp-board">Daily leaderboard</h2>
+        <p class="section-sub">This game's daily board opens soon. Until then, playing free is always free.</p>
+      </div>
+      <span class="btn btn-plain btn-off" aria-disabled="true">Leaderboard opens soon</span>
+    </div>
+  </section>
+
   <section class="section" aria-labelledby="gp-more">
     <div class="wrap">
       <div class="section-head">
         <h2 class="section-title" id="gp-more">More games like this</h2>
         <a class="btn btn-plain" href="/games/">All <!-- fb:n games -->37<!-- /fb:n --> games →</a>
       </div>
-      <div class="games-grid games-grid-home"><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-play" href="https://codebot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/codebot.jpg" width="640" height="480" loading="lazy" alt="CODEBOT gameplay"></span><span class="game-body"><span class="game-name">CODEBOT</span><span class="game-desc">Crack the Bot&#x27;s secret colour code in as few tries as possible.</span></span></a><a class="game-more" href="/games/codebot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-play" href="https://jambot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/jambot.jpg" width="640" height="480" loading="lazy" alt="JAMBOT gameplay"></span><span class="game-body"><span class="game-name">JAMBOT</span><span class="game-desc">Slide the bot-buses aside and drive Bot 2969 out of the jam.</span></span></a><a class="game-more" href="/games/jambot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-11"><a class="game-play" href="https://sumbot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/sumbot.jpg" width="640" height="480" loading="lazy" alt="SUMBOT gameplay"></span><span class="game-body"><span class="game-name">SUMBOT</span><span class="game-desc">Combine the numbers with + − × ÷ to hit the target.</span></span></a><a class="game-more" href="/games/sumbot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-11"><a class="game-play" href="https://minebot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/minebot.jpg" width="640" height="480" loading="lazy" alt="MINEBOT gameplay"></span><span class="game-body"><span class="game-name">MINEBOT</span><span class="game-desc">Clear the field using the number clues — never a guess.</span></span></a><a class="game-more" href="/games/minebot/">How to play →</a></div></div>
+      <div class="games-grid games-grid-home"><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-open" href="/games/codebot/"><span class="game-art"><img class="shot" src="/assets/games/codebot.jpg" width="640" height="480" loading="lazy" alt="CODEBOT gameplay"></span><span class="game-body"><span class="game-name">CODEBOT</span><span class="game-desc">Crack the Bot&#x27;s secret colour code in as few tries as possible.</span></span></a><a class="game-quick btn btn-amber btn-sm" href="https://codebot.finnstergram.com" aria-label="Play CODEBOT now">&#9654; Play now</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-open" href="/games/jambot/"><span class="game-art"><img class="shot" src="/assets/games/jambot.jpg" width="640" height="480" loading="lazy" alt="JAMBOT gameplay"></span><span class="game-body"><span class="game-name">JAMBOT</span><span class="game-desc">Slide the bot-buses aside and drive Bot 2969 out of the jam.</span></span></a><a class="game-quick btn btn-amber btn-sm" href="https://jambot.finnstergram.com" aria-label="Play JAMBOT now">&#9654; Play now</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-11"><a class="game-open" href="/games/sumbot/"><span class="game-art"><img class="shot" src="/assets/games/sumbot.jpg" width="640" height="480" loading="lazy" alt="SUMBOT gameplay"></span><span class="game-body"><span class="game-name">SUMBOT</span><span class="game-desc">Combine the numbers with + − × ÷ to hit the target.</span></span></a><a class="game-quick btn btn-amber btn-sm" href="https://sumbot.finnstergram.com" aria-label="Play SUMBOT now">&#9654; Play now</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-11"><a class="game-open" href="/games/minebot/"><span class="game-art"><img class="shot" src="/assets/games/minebot.jpg" width="640" height="480" loading="lazy" alt="MINEBOT gameplay"></span><span class="game-body"><span class="game-name">MINEBOT</span><span class="game-desc">Clear the field using the number clues — never a guess.</span></span></a><a class="game-quick btn btn-amber btn-sm" href="https://minebot.finnstergram.com" aria-label="Play MINEBOT now">&#9654; Play now</a></div></div>
     </div>
   </section>
   <script type="application/ld+json">{"@context": "https://schema.org", "@type": "VideoGame", "name": "LINKBOT", "description": "Join every pair of plugs and fill the whole board.", "url": "https://finnstergram.com/games/linkbot/", "image": "https://finnstergram.com/assets/games/linkbot.jpg", "genre": "Puzzles & board games", "gamePlatform": "Web browser", "applicationCategory": "Game", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "publisher": {"@type": "Organization", "name": "FinnBots", "url": "https://finnstergram.com"}}</script>
