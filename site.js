@@ -460,6 +460,8 @@
       at = (i + order.length) % order.length;
       var g = order[at];
       gotd.href = g.url;
+      var bg = $('[data-spot-bg]', wrap); if (bg) bg.style.backgroundImage = 'url(' + (g.shot || '/assets/bots/' + g.bot + '.png') + ')';
+      var how = $('[data-gotd-how]', wrap); if (how) how.href = g.page;
       $('[data-gotd-label]', gotd).textContent = at === 0 ? 'Game of the day' : 'Spotlight';
       $('[data-gotd-name]', gotd).textContent = g.name;
       $('[data-gotd-desc]', gotd).textContent = g.desc;
@@ -500,14 +502,16 @@
     var picks = recentList().map(function (u) { return by[u]; }).filter(Boolean).slice(0, 4);
     if (!picks.length) return;
     var grid = $('[data-recent-grid]', recent);
-    picks.forEach(function (g) {                       // a compact shortcut: picture, name, "Play again"
-      var a = d.createElement('a'); a.className = 'panel recent-card'; a.href = g.url;
+    picks.forEach(function (g) {                       // a compact shortcut: picture + name play it; "How to play" opens its page
+      var card = d.createElement('div'); card.className = 'panel recent-card';
+      var a = d.createElement('a'); a.className = 'recent-play'; a.href = g.url;
       var img = d.createElement('img'); img.width = 640; img.height = 480; img.loading = 'lazy'; img.alt = '';
       img.setAttribute('aria-hidden', 'true');
       if (g.shot) img.src = g.shot; else { img.className = 'px'; img.src = '/assets/bots/' + g.bot + '.png'; }
-      var txt = d.createElement('span'), nm = d.createElement('b'), go = d.createElement('small');
-      nm.textContent = g.name; go.textContent = 'Play again →';
-      txt.appendChild(nm); txt.appendChild(go); a.appendChild(img); a.appendChild(txt); grid.appendChild(a);
+      var nm = d.createElement('b'); nm.textContent = g.name;
+      a.appendChild(img); a.appendChild(nm);
+      var how = d.createElement('a'); how.className = 'recent-how'; how.href = g.page; how.textContent = 'How to play →';
+      card.appendChild(a); card.appendChild(how); grid.appendChild(card);
     });
     recent.hidden = false;
   }).catch(function () {});
