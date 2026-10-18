@@ -437,7 +437,9 @@ a.chip { text-decoration: none; color: inherit; }
 .new-tag { position: absolute; left: 8px; top: 8px; background: var(--amber); color: #2a2230; border: 2px solid var(--edge);
   font: 18px/1 var(--font-display); padding: 2px 8px 3px; border-radius: 6px; box-shadow: 2px 2px 0 0 var(--edge); }
 .game-body { flex: 1; display: flex; flex-direction: column; gap: var(--s1); padding: var(--s3) var(--s4) var(--s4); }
-.game-name { font: 28px/1 var(--font-display); color: var(--heading); }
+.game-name { font: 28px/1 var(--font-display); color: var(--heading); text-transform: uppercase; letter-spacing: .5px; }
+/* every game NAME in capitals (Founder 2026-10-18: "standard caps or all caps not a mix") */
+.spot-name, .gp-info h1, .link-card b { text-transform: uppercase; }
 .game-desc { color: var(--muted); font-size: 14.5px; line-height: 1.4; }
 .game:hover .game-art > img:first-child, .game:focus-visible .game-art > img:first-child { transform: scale(1.04); }
 .gtag { font-size: 12px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; padding: 2px 8px; border-radius: 999px;
@@ -656,5 +658,16 @@ a.chip { text-decoration: none; color: inherit; }
 @media (max-width: 860px) { .promises { grid-template-columns: 1fr; } }
 
 /* ---- Continue playing -------------------------------------------------------------- */
-.recent { padding-bottom: 0; }
-.recent .shelf-title { margin-bottom: var(--s4); }
+.recent { padding-bottom: var(--s6); }
+.section.recent + .section:not(.band) { padding-top: var(--s6); border-top: var(--px) solid var(--line); }
+.recent .shelf-title { font-size: clamp(26px, 3vw, 32px); margin-bottom: var(--s3); }
+.recent-row { display: grid; gap: var(--s3); grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.recent-card { display: grid; grid-template-columns: 88px 1fr; gap: var(--s3); align-items: center; padding: var(--s2);
+  text-decoration: none; color: inherit; box-shadow: var(--shadow-sm); }
+.recent-card img { width: 88px; height: 66px; object-fit: cover; border-radius: 8px; border: 2px solid var(--edge); }
+.recent-card b { display: block; font: 22px/1 var(--font-display); color: var(--heading); text-transform: uppercase;
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.recent-card small { color: var(--link); font-weight: 700; font-size: 13px; }
+.recent-card:hover { border-color: var(--amber); }
+@media (max-width: 960px) { .recent-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 420px) { .recent-card { grid-template-columns: 56px 1fr; gap: var(--s2); } .recent-card img { width: 56px; height: 42px; } .recent-card b { font-size: 18px; } .recent-card small { font-size: 12px; white-space: nowrap; } }
