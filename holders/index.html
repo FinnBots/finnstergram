@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="fb-build" content="8fb5bd8e0b36">
+<meta name="fb-build" content="2c9246495bb3">
 <title>Holder Dashboard — FinnBots</title>
 <meta name="description" content="Connect your wallet to see your $OIL balance, your FinnBots and what they earn each day. Read-only: nothing is ever signed.">
 <link rel="canonical" href="https://finnstergram.com/holders/">
@@ -29,9 +29,9 @@
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jersey15-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=8dc1a66eb0">
+<link rel="stylesheet" href="/style.css?v=2bfcea78b7">
 <script>document.documentElement.classList.add('js');var m=/(?:^|;\s*)fb-theme=(light|dark)(?:;|$)/.exec(document.cookie||''),t=m&&m[1];if(!t)try{t=localStorage.getItem('fb-theme')}catch(e){}if(t==='light'||t==='dark')document.documentElement.dataset.theme=t</script>
-<script src="/site.js?v=01167aa07a" defer></script>
+<script src="/site.js?v=ffe05ad21e" defer></script>
 <script src="/assets/js/phantom-deeplink-libs.min.js" defer></script>
 <script src="/assets/js/phantom-mobile.js" defer></script>
 <script src="/assets/js/holders.js" defer></script>
@@ -85,6 +85,34 @@
             <p>Read-only: the dashboard only reads your public balances. It never asks you to sign or send anything — if anything ever asks you to sign on this page, close it.</p>
           </div>
         </div>
+
+        <div class="preview" aria-labelledby="preview-title">
+          <div class="section-head preview-head">
+            <div>
+              <p class="eyebrow"><span class="blink" aria-hidden="true"></span>Example</p>
+              <h2 class="section-title" id="preview-title">What you'll see</h2>
+              <p class="section-sub">An example wallet holding three Bots. Connect yours to see your own.</p>
+            </div>
+          </div>
+          <div class="stats holder-stats" aria-hidden="true">
+            <div class="panel stat"><b>3</b><span>Bots held</span></div>
+            <div class="panel stat"><b>30</b><span>$OIL earned per day</span></div>
+            <div class="panel stat"><b>210</b><span>$OIL this week</span></div>
+            <div class="panel stat"><b>Weekly</b><span>paid in the batch, not instantly</span></div>
+          </div>
+          <div class="preview-bots" aria-hidden="true">
+            <img class="px" src="/assets/bots/500.png" width="512" height="512" alt="" aria-hidden="true" loading="lazy">
+            <img class="px" src="/assets/bots/2427.png" width="512" height="512" alt="" aria-hidden="true" loading="lazy">
+            <img class="px" src="/assets/bots/1863.png" width="512" height="512" alt="" aria-hidden="true" loading="lazy">
+          </div>
+          <div class="panel nobot">
+            <div>
+              <h3>No Bot yet?</h3>
+              <p>Every Bot earns 10 $OIL a day for its holder. Bots trade on the Solana marketplaces.</p>
+            </div>
+            <a class="btn btn-amber" href="/showcase/#buy">Buy a Bot</a>
+          </div>
+        </div>
       </div>
 
       <div data-h-board hidden>
@@ -116,7 +144,7 @@
         <code id="oil-mint">HrcfXJcFdMoLfbkN5qCTSFrLsAgJNHitmwKc5AyS7xzf</code>
         <div class="card-foot">
           <button class="btn btn-plain btn-sm needs-js" type="button" data-copy="#oil-mint">Copy address</button>
-          <a class="more" href="/games/">Spend it in the games →</a>
+          <a class="more" href="/games/#boards">Spend it on ranked runs →</a>
         </div>
       </div>
     </div>
@@ -132,6 +160,7 @@
 <li><a href="/showcase/">Bots</a></li>
 <li><a href="/holders/">Holder Dashboard</a></li>
 <li><a href="/roadmap/">Roadmap</a></li>
+<li><a href="/parents/">For parents</a></li>
 <li><a href="/contact-us/">Contact</a></li>
 <li><a href="https://magiceden.io/marketplace/finnbot">Buy a Bot – Magic Eden</a></li>
 <li><a href="https://www.tensor.trade/trade/finnbot">Buy a Bot – Tensor</a></li>

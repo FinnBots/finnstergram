@@ -444,6 +444,8 @@
     /* today's game first, then every other game in list order — and it ROTATES (Founder 2026-10-17: "the hero game
        needs to rotate to other games"). Pauses while hovered or focused, or when the tab is hidden; never moves by
        itself for someone who turned motion off (the buttons still work). */
+    list = list.filter(function (g) { return !g.prize; });   // prize games are never featured (Founder, 2026-10-18)
+    if (!list.length) return;
     var start = Math.floor(Date.now() / 864e5) % list.length, at = 0, timer = null, held = false;
     var order = list.slice(start).concat(list.slice(0, start));
     var wrap = gotd.closest('[data-spot-wrap]') || gotd.parentNode, art = $('.game-art', gotd), count = $('[data-spot-count]', wrap);
@@ -473,6 +475,41 @@
     ['mouseleave', 'focusout'].forEach(function (ev) { wrap.addEventListener(ev, function () { held = false; }); });
     show(0); play();
   }).catch(function () { /* the Featured pick stays */ });
+  /* ---- Continue playing: the last games this browser opened from the site ---------- */
+  /* Kept in this browser only (localStorage on finnstergram.com): no cookie, no account, nothing sent anywhere.
+     A game opened from a card, the spotlight or a game page is remembered; the row shows the last four. */
+  var RECENT = 'fb-recent';
+  function recentList() { try { return JSON.parse(localStorage.getItem(RECENT) || '[]'); } catch (e) { return []; } }
+  d.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="https://"]');
+    if (!a || !/\.finnstergram\.com/.test(a.hostname) || /leaderboard/.test(a.pathname)) return;
+    var url = a.href.replace(/\/$/, ''), list = recentList().filter(function (u) { return u !== url; });
+    list.unshift(url);
+    try { localStorage.setItem(RECENT, JSON.stringify(list.slice(0, 8))); } catch (err) { /* private mode: nothing kept */ }
+  });
+  var recent = $('[data-recent]');
+  if (recent && recentList().length) fetch('/assets/games.json').then(function (r) { return r.ok ? r.json() : []; }).then(function (all) {
+    var by = {}; all.forEach(function (g) { by[g.url.replace(/\/$/, '')] = g; });
+    var picks = recentList().map(function (u) { return by[u]; }).filter(Boolean).slice(0, 4);
+    if (!picks.length) return;
+    var grid = $('[data-recent-grid]', recent);
+    picks.forEach(function (g) {
+      var card = d.createElement('div'); card.className = 'panel game';
+      var play = d.createElement('a'); play.className = 'game-play'; play.href = g.url;
+      var art = d.createElement('span'); art.className = 'game-art';
+      var img = d.createElement('img'); img.width = 640; img.height = 480; img.loading = 'lazy'; img.alt = g.name + ' gameplay';
+      if (g.shot) { img.className = 'shot'; img.src = g.shot; } else { img.className = 'px'; img.src = '/assets/bots/' + g.bot + '.png'; }
+      art.appendChild(img);
+      var body = d.createElement('span'); body.className = 'game-body';
+      var nm = d.createElement('span'); nm.className = 'game-name'; nm.textContent = g.name;
+      var ds = d.createElement('span'); ds.className = 'game-desc'; ds.textContent = g.desc;
+      body.appendChild(nm); body.appendChild(ds); play.appendChild(art); play.appendChild(body); card.appendChild(play);
+      var more = d.createElement('a'); more.className = 'game-more'; more.href = g.page; more.textContent = 'How to play →';
+      card.appendChild(more); grid.appendChild(card);
+    });
+    recent.hidden = false;
+  }).catch(function () {});
+
   $$('.game[data-added]').forEach(function (el) {
     var t0 = Date.parse(el.dataset.added);
     if (t0 && Date.now() - t0 < 14 * 864e5) { var s = d.createElement('span'); s.className = 'new-tag'; s.textContent = 'New'; $('.game-art', el).appendChild(s); }

@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="fb-build" content="8fb5bd8e0b36">
+<meta name="fb-build" content="2c9246495bb3">
 <title>FinnBots — free robot games and 3,000 Bots on Solana</title>
 <meta name="description" content="37 free arcade, puzzle and word games starring the FinnBots: 3,000 robot characters made by a dad and his daughter, just for fun.">
 <link rel="canonical" href="https://finnstergram.com/">
@@ -29,9 +29,9 @@
 <link rel="icon" href="/favicon.png" type="image/png">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <link rel="preload" href="/assets/fonts/jersey15-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/style.css?v=8dc1a66eb0">
+<link rel="stylesheet" href="/style.css?v=2bfcea78b7">
 <script>document.documentElement.classList.add('js');var m=/(?:^|;\s*)fb-theme=(light|dark)(?:;|$)/.exec(document.cookie||''),t=m&&m[1];if(!t)try{t=localStorage.getItem('fb-theme')}catch(e){}if(t==='light'||t==='dark')document.documentElement.dataset.theme=t</script>
-<script src="/site.js?v=01167aa07a" defer></script>
+<script src="/site.js?v=ffe05ad21e" defer></script>
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "b11bf18cfe07453484c01ca2d417e772"}'></script>
 <!-- /fb:head -->
 </head>
@@ -78,6 +78,13 @@
     </div>
   </section>
 
+  <section class="section recent" data-recent hidden aria-labelledby="recent-title">
+    <div class="wrap">
+      <h2 class="shelf-title" id="recent-title">Continue playing</h2>
+      <div class="games-grid games-grid-home" data-recent-grid></div>
+    </div>
+  </section>
+
   <section class="section home-play" id="play" aria-labelledby="play-title">
     <div class="wrap">
       <div class="section-head">
@@ -89,7 +96,7 @@
         <a class="btn btn-plain" href="/games/">All <!-- fb:n games -->37<!-- /fb:n --> games →</a>
       </div>
 <!-- fb:play -->
-<div class="games-grid games-grid-home"><a class="panel game tilt" href="https://play.finnstergram.com" data-genre="quick" data-added="2026-10-17"><span class="game-art"><img class="shot" src="/assets/games/play.jpg" width="640" height="480" loading="lazy" alt="Pick-a-Bot gameplay"></span><span class="game-body"><span class="game-name">Pick-a-Bot</span><span class="game-desc">Pick 1 of 10 and find the matching Bot.</span></span></a><a class="panel game tilt" href="https://spot.finnstergram.com" data-genre="quick" data-added="2026-10-17"><span class="game-art"><img class="shot" src="/assets/games/spot.jpg" width="640" height="480" loading="lazy" alt="Spot-a-FinnBot gameplay"></span><span class="game-body"><span class="game-name">Spot-a-FinnBot</span><span class="game-desc">Find the hidden FinnBot before the 45-second timer runs out.</span></span></a><a class="panel game tilt" href="https://codebot.finnstergram.com" data-genre="puzzle" data-added="2026-10-16"><span class="game-art"><img class="shot" src="/assets/games/codebot.jpg" width="640" height="480" loading="lazy" alt="CODEBOT gameplay"></span><span class="game-body"><span class="game-name">CODEBOT</span><span class="game-desc">Crack the Bot&#x27;s secret colour code in as few tries as possible.</span></span></a><a class="panel game tilt" href="https://linkbot.finnstergram.com" data-genre="puzzle" data-added="2026-10-16"><span class="game-art"><img class="shot" src="/assets/games/linkbot.jpg" width="640" height="480" loading="lazy" alt="LINKBOT gameplay"></span><span class="game-body"><span class="game-name">LINKBOT</span><span class="game-desc">Join every pair of plugs and fill the whole board.</span></span></a><a class="panel game tilt" href="https://wordswithbots.finnstergram.com" data-genre="words"><span class="game-art"><img class="shot" src="/assets/games/wordswithbots.jpg" width="640" height="480" loading="lazy" alt="Words with Bots gameplay"></span><span class="game-body"><span class="game-name">Words with Bots</span><span class="game-desc">Build words on the board and outscore the Bot.</span></span></a><a class="panel game tilt" href="https://run.finnstergram.com" data-genre="arcade"><span class="game-art"><img class="shot" src="/assets/games/run.jpg" width="640" height="480" loading="lazy" alt="BOTRUN gameplay"></span><span class="game-body"><span class="game-name">BOTRUN</span><span class="game-desc">Race down the coast and beat the clock to every checkpoint.</span></span></a><a class="panel game tilt" href="https://bubblebot.finnstergram.com" data-genre="arcade"><span class="game-art"><img class="shot" src="/assets/games/bubblebot.jpg" width="640" height="480" loading="lazy" alt="BubbleBot gameplay"></span><span class="game-body"><span class="game-name">BubbleBot</span><span class="game-desc">Trap enemies in bubbles, then pop them — 100 rounds.</span></span></a><a class="panel game tilt" href="https://botman.finnstergram.com/" data-genre="arcade"><span class="game-art"><img class="shot" src="/assets/games/botman.jpg" width="640" height="480" loading="lazy" alt="BOTMAN gameplay"></span><span class="game-body"><span class="game-name">BOTMAN</span><span class="game-desc">Clear the maze of Beads while four hunters chase you.</span></span></a></div>
+<div class="games-grid games-grid-home"><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-play" href="https://codebot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/codebot.jpg" width="640" height="480" loading="lazy" alt="CODEBOT gameplay"></span><span class="game-body"><span class="game-name">CODEBOT</span><span class="game-desc">Crack the Bot&#x27;s secret colour code in as few tries as possible.</span></span></a><a class="game-more" href="/games/codebot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-play" href="https://linkbot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/linkbot.jpg" width="640" height="480" loading="lazy" alt="LINKBOT gameplay"></span><span class="game-body"><span class="game-name">LINKBOT</span><span class="game-desc">Join every pair of plugs and fill the whole board.</span></span></a><a class="game-more" href="/games/linkbot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-16"><a class="game-play" href="https://jambot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/jambot.jpg" width="640" height="480" loading="lazy" alt="JAMBOT gameplay"></span><span class="game-body"><span class="game-name">JAMBOT</span><span class="game-desc">Slide the bot-buses aside and drive Bot 2969 out of the jam.</span></span></a><a class="game-more" href="/games/jambot/">How to play →</a></div><div class="panel game tilt" data-genre="puzzle" data-added="2026-10-11"><a class="game-play" href="https://sumbot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/sumbot.jpg" width="640" height="480" loading="lazy" alt="SUMBOT gameplay"></span><span class="game-body"><span class="game-name">SUMBOT</span><span class="game-desc">Combine the numbers with + − × ÷ to hit the target.</span></span></a><a class="game-more" href="/games/sumbot/">How to play →</a></div><div class="panel game tilt" data-genre="words"><a class="game-play" href="https://wordswithbots.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/wordswithbots.jpg" width="640" height="480" loading="lazy" alt="Words with Bots gameplay"></span><span class="game-body"><span class="game-name">Words with Bots</span><span class="game-desc">Build words on the board and outscore the Bot.</span></span></a><a class="game-more" href="/games/words-with-bots/">How to play · Leaderboard →</a></div><div class="panel game tilt" data-genre="arcade"><a class="game-play" href="https://run.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/run.jpg" width="640" height="480" loading="lazy" alt="BOTRUN gameplay"></span><span class="game-body"><span class="game-name">BOTRUN</span><span class="game-desc">Race down the coast and beat the clock to every checkpoint.</span></span></a><a class="game-more" href="/games/botrun/">How to play · Leaderboard →</a></div><div class="panel game tilt" data-genre="arcade"><a class="game-play" href="https://bubblebot.finnstergram.com"><span class="game-art"><img class="shot" src="/assets/games/bubblebot.jpg" width="640" height="480" loading="lazy" alt="BubbleBot gameplay"></span><span class="game-body"><span class="game-name">BubbleBot</span><span class="game-desc">Trap enemies in bubbles, then pop them — 100 rounds.</span></span></a><a class="game-more" href="/games/bubblebot/">How to play · Leaderboard →</a></div><div class="panel game tilt" data-genre="arcade"><a class="game-play" href="https://botman.finnstergram.com/"><span class="game-art"><img class="shot" src="/assets/games/botman.jpg" width="640" height="480" loading="lazy" alt="BOTMAN gameplay"></span><span class="game-body"><span class="game-name">BOTMAN</span><span class="game-desc">Clear the maze of Beads while four hunters chase you.</span></span></a><a class="game-more" href="/games/botman/">How to play · Leaderboard →</a></div></div>
 <!-- /fb:play -->
     </div>
   </section>
@@ -103,7 +110,7 @@
         <p class="quiet">The project went quiet and the images broke. The founder taught himself new tools, put every Bot back on permanent storage, and started building games for them. That's the revival.</p>
         <dl class="facts">
           <div><dt><!-- fb:n games -->37<!-- /fb:n --></dt><dd>free games</dd></div>
-          <div><dt><!-- fb:n live -->26<!-- /fb:n --></dt><dd>daily leaderboards</dd></div>
+          <div><dt><!-- fb:n live -->26<!-- /fb:n --></dt><dd><a href="/games/#boards">daily leaderboards</a></dd></div>
           <div><dt>3,000</dt><dd>Bots, three editions</dd></div>
         </dl>
       </div>
@@ -157,6 +164,7 @@
 <li><a href="/showcase/">Bots</a></li>
 <li><a href="/holders/">Holder Dashboard</a></li>
 <li><a href="/roadmap/">Roadmap</a></li>
+<li><a href="/parents/">For parents</a></li>
 <li><a href="/contact-us/">Contact</a></li>
 <li><a href="https://magiceden.io/marketplace/finnbot">Buy a Bot – Magic Eden</a></li>
 <li><a href="https://www.tensor.trade/trade/finnbot">Buy a Bot – Tensor</a></li>

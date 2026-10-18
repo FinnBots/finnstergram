@@ -14,7 +14,7 @@
   --plum: #5f4c57; --plum-deep: #3e323a; --amber: #f2a03d; --screen: #241b28; --cyan: #8ff7f7;
   --fb-amber: var(--amber); --fb-screen: var(--screen); --fb-face: #ff4fd8;   /* names the shared bot-mark SVG uses */
   --bg: #fdf3e7; --bg-2: #f8e7d2; --card: #fffaf3; --ink: #2a2230; --muted: #6a5f6c;
-  --heading: #5f4c57; --link: #a35f0c; --line: rgba(95, 76, 87, .18); --edge: #3e323a;
+  --heading: #5f4c57; --link: #8f5208; --amber-ink: #b8650a;   /* amber TEXT on cream: 3.9:1 (the brand amber is 1.9:1) */ --line: rgba(95, 76, 87, .18); --edge: #3e323a;
   --head-bg: rgba(253, 243, 231, .86); --foot-bg: #3e323a;
   --ok: #24733f; --ok-bg: #dff2e5; --wip: #8a4f05; --wip-bg: #fde8c8;
   --dots: rgba(95, 76, 87, .10); --stars: 0; --glow: 0 0 0 transparent;
@@ -32,7 +32,7 @@
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
     --bg: #17121a; --bg-2: #1f1824; --card: #261e2b; --ink: #f4eef2; --muted: #b9aab9;
-    --heading: #e3c9d8; --link: #f6b45c; --line: rgba(255, 255, 255, .12); --edge: #6b5662;
+    --heading: #e3c9d8; --link: #f6b45c; --amber-ink: var(--amber); --amber-ink: var(--amber); --line: rgba(255, 255, 255, .12); --edge: #6b5662;
     --head-bg: rgba(23, 18, 26, .84); --foot-bg: #0e0b10;
     --ok: #86dda0; --ok-bg: #1d3626; --wip: #f6c27a; --wip-bg: #3a2a12;
     --dots: rgba(255, 255, 255, .06); --stars: 1; --glow: 0 0 28px rgba(143, 247, 247, .35);
@@ -68,7 +68,7 @@ a { color: inherit; text-underline-offset: 3px; }
   padding: 8px 14px; border-radius: 8px; font-weight: 700; text-decoration: none; }
 .skip:focus { top: 12px; }
 h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height: 1; letter-spacing: .5px; margin: 0; color: var(--heading); }
-.amber { color: var(--amber); }
+.amber { color: var(--amber-ink); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
 /* ---- header ----------------------------------------------------------------- */
@@ -79,7 +79,7 @@ h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 400; line-height
 .fb-bot { width: 32px; height: 32px; display: block; transition: transform .3s; }
 .fb-mark:hover .fb-bot { transform: rotate(-8deg) scale(1.08); }
 .fb-word { font-family: var(--font-display); font-size: 28px; line-height: 1; letter-spacing: .5px; }
-.fb-word i { font-style: normal; color: var(--amber); }
+.fb-word i { font-style: normal; color: var(--amber-ink); }
 .nav { margin-left: auto; min-width: 0; }
 .nav ul { list-style: none; margin: 0; padding: 0; display: flex; gap: 2px; }
 .nav a { display: block; padding: 8px 11px; border-radius: 999px; text-decoration: none; font-weight: 600;
@@ -303,7 +303,7 @@ details.show-more .content p { margin: 0; }
 .finder-msg.warn { color: var(--wip); font-weight: 600; }
 .finder-row { display: flex; flex-wrap: wrap; gap: 10px; align-items: stretch; margin-bottom: 14px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin: 4px 0 18px; }
-.chip { border: 2px solid var(--edge); background: var(--card); color: var(--ink); border-radius: 999px; padding: 6px 14px;
+.chip { min-height: 40px; display: inline-flex; align-items: center; border: 2px solid var(--edge); background: var(--card); color: var(--ink); border-radius: 999px; padding: 6px 14px;
   font: 600 14.5px/1 var(--font-body); cursor: pointer; }
 .chip[aria-pressed="true"] { background: var(--plum-deep); color: #fff; }
 .finder-links { display: flex; flex-wrap: wrap; gap: 16px; }
@@ -382,8 +382,10 @@ html.js .no-js-only { display: none; }
 .site-foot nav ul { justify-content: flex-end; }
 @media (max-width: 760px) { .site-foot .wrap { grid-template-columns: 1fr; } .site-foot nav ul { justify-content: flex-start; } }
 .site-foot .fb-mark { color: #f4eef2; }
+.site-foot .fb-word i { color: var(--amber); }                 /* the footer is always dark */
 .site-foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.site-foot a { text-decoration: none; font-weight: 600; opacity: .9; }
+.site-foot a { text-decoration: none; font-weight: 600; opacity: .9; display: inline-flex; align-items: center; min-height: 44px; }
+.site-foot ul { row-gap: 0; }
 .site-foot a:hover { text-decoration: underline; opacity: 1; }
 .site-foot small { opacity: .7; font-size: 14px; }
 
@@ -425,6 +427,11 @@ html.js .no-js-only { display: none; }
 a.chip { text-decoration: none; color: inherit; }
 .games-grid { display: grid; gap: var(--s4); grid-template-columns: repeat(auto-fill, minmax(min(100%, 210px), 1fr)); align-items: stretch; }
 .game { display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; height: 100%; box-shadow: var(--shadow-sm); }
+.game-play { flex: 1; display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+.game-more { display: flex; align-items: center; min-height: 40px; padding: 0 var(--s4) var(--s2); font-size: 13.5px; font-weight: 700;
+  color: var(--link); text-decoration: none; }
+.game-more:hover { text-decoration: underline; }
+@media (max-width: 560px) { .game-more { padding: 0 var(--s3) var(--s1); font-size: 12.5px; } }
 .game-art { position: relative; display: block; aspect-ratio: 4 / 3; overflow: hidden; background: var(--screen); border-bottom: var(--px) solid var(--edge); }
 .game-art > img:first-child { width: 100%; height: 100%; object-fit: cover; transition: transform .2s; }
 .new-tag { position: absolute; left: 8px; top: 8px; background: var(--amber); color: #2a2230; border: 2px solid var(--edge);
@@ -587,3 +594,66 @@ a.chip { text-decoration: none; color: inherit; }
   .prop { grid-template-columns: 1fr auto; row-gap: 2px; }
   .prop dt { grid-column: 1 / -1; }
 }
+
+/* Bots page on phones: the three edition cards are compact rows, not three full-width squares
+   (the page was 10,700px tall and the search sat 1,800px down) */
+@media (max-width: 620px) {
+  .showcase .cards { grid-template-columns: 1fr; gap: var(--s3); }
+  .showcase .card { display: grid; grid-template-columns: 112px 1fr; align-items: center; }
+  .showcase .card > img { width: 112px; height: 112px; border-bottom: 0; border-right: var(--px) solid var(--edge); }
+  .showcase .card-body { padding: var(--s3) var(--s4); gap: var(--s1); }
+  .showcase .card h2 { font-size: 30px; }
+  .showcase .card .card-foot { padding-top: var(--s1); }
+}
+
+/* ---- game pages (/games/<game>/, generated from data/games.json) ------------------ */
+.crumbs { margin: 0 0 var(--s4); color: var(--muted); font-weight: 600; font-size: 15px; }
+.crumbs a { color: inherit; display: inline-flex; min-height: 40px; align-items: center; }
+.gp-top { padding-top: var(--s5); }
+.gp-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); gap: clamp(var(--s5), 4vw, var(--s7)); align-items: center; }
+.gp-shot { display: block; overflow: hidden; }
+.gp-shot .game-art { border-bottom: 0; }
+.gp-info h1 { font-size: clamp(48px, 7vw, 84px); }
+.gp-info .lede { margin-top: var(--s4); max-width: 36ch; }
+.gp-note { color: var(--muted); font-size: 15px; margin: var(--s4) 0 0; }
+.gp-how { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: var(--s6); align-items: start; }
+.gp-how .big { font-size: clamp(18px, 2.2vw, 21px); line-height: 1.55; margin: 0; max-width: 52ch; }
+.gp-controls { margin: 0; padding: var(--s5); display: grid; gap: var(--s4); }
+.gp-controls dt { font: 24px/1 var(--font-display); color: var(--heading); }
+.gp-controls dd { margin: var(--s1) 0 0; color: var(--ink); }
+.gp-boardrow { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s5); }
+.gp-boardrow .section-sub { margin-bottom: 0; }
+@media (max-width: 760px) { .gp-grid, .gp-how { grid-template-columns: 1fr; } }
+
+/* ---- the leaderboards list (/games/#boards) --------------------------------------- */
+.boards { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s2) var(--s3); grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); }
+@media (max-width: 560px) { .boards { grid-template-columns: repeat(2, minmax(0, 1fr)); } .board-link { padding: 0 var(--s3); font-size: 14px; min-height: 44px; } }
+.board-link { display: flex; align-items: center; justify-content: space-between; min-height: 48px; padding: 0 var(--s4);
+  border: 2px solid var(--edge); border-radius: var(--radius-sm); background: var(--card); font-weight: 700; text-decoration: none; color: var(--ink); }
+.board-link:hover { border-color: var(--amber); }
+.board-link span { color: var(--link); }
+.facts dd a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+/* ---- Holder Dashboard: what you'll see before connecting ----------------------------- */
+.preview { margin-top: var(--s7); }
+.preview-head { margin-bottom: var(--s4); }
+.preview .stats { opacity: .92; }
+.preview-bots { display: flex; gap: var(--s3); margin: var(--s4) 0 var(--s5); }
+.preview-bots img { width: 96px; height: 96px; border-radius: var(--radius-sm); border: var(--px) solid var(--edge); }
+.nobot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--s4); padding: var(--s5); }
+.nobot h3 { font-size: 30px; margin-bottom: var(--s1); }
+.nobot p { margin: 0; color: var(--muted); }
+
+/* ---- For parents ---------------------------------------------------------------- */
+.promises { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s4); grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.promises li { padding: var(--s5); display: grid; gap: var(--s2); align-content: start; }
+.promises b { font: 30px/1 var(--font-display); color: var(--heading); }
+.promises span { color: var(--muted); }
+.parent-tips { padding: var(--s5); }
+.parent-tips h3 { font-size: 30px; margin-bottom: var(--s3); }
+.parent-tips ul { margin: 0; padding-left: 20px; display: grid; gap: var(--s2); }
+@media (max-width: 860px) { .promises { grid-template-columns: 1fr; } }
+
+/* ---- Continue playing -------------------------------------------------------------- */
+.recent { padding-bottom: 0; }
+.recent .shelf-title { margin-bottom: var(--s4); }
