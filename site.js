@@ -7,6 +7,13 @@
   var d = document, root = d.documentElement;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---- no service worker, ever -------------------------------------------------- */
+  /* The old GoDaddy site left a service worker that served its own pages for every visit. /sw.js now removes
+     itself; this is the belt to that brace for a page that does load: unregister anything still registered. */
+  if (navigator.serviceWorker && navigator.serviceWorker.getRegistrations) navigator.serviceWorker.getRegistrations().then(function (rs) {
+    rs.forEach(function (r) { r.unregister(); });
+  }).catch(function () {});
+
   /* ---- never show an old page ---------------------------------------------------- */
   /* GitHub Pages lets a browser keep a page for 10 minutes, so right after a publish a visitor could see the
      previous build. Each page names its build; /assets/build.json (fetched uncached) names the live one. If they
