@@ -384,7 +384,7 @@ html.js .no-js-only { display: none; }
 .site-foot .fb-mark { color: #f4eef2; }
 .site-foot .fb-word i { color: var(--amber); }                 /* the footer is always dark */
 .site-foot ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.site-foot a { text-decoration: none; font-weight: 600; opacity: .9; display: inline-flex; align-items: center; min-height: 44px; }
+.site-foot a { text-decoration: none; font-weight: 600; opacity: .9; display: inline-flex; align-items: center; justify-content: center; min-height: 44px; min-width: 44px; }
 .site-foot ul { row-gap: 0; }
 .site-foot a:hover { text-decoration: underline; opacity: 1; }
 .site-foot small { opacity: .7; font-size: 14px; }
@@ -509,7 +509,8 @@ a.chip { text-decoration: none; color: inherit; }
 
 /* the grown-ups' zone: set apart from the free arcade */
 .grownups { border-top-style: dashed; }
-.oil-safe .more { display: inline-block; margin-top: var(--s4); }
+.oil-safe .more { display: inline-flex; align-items: center; min-height: 44px; margin-top: var(--s2); }
+.mint-card .more { display: inline-flex; align-items: center; min-height: 44px; }
 .oil-safe p + p { margin-top: var(--s3); }
 
 /* home: stats, Find a Bot teaser; Bots: buy */
