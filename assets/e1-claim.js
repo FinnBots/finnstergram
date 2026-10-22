@@ -27,6 +27,8 @@
   function dayName(d){ try{ return new Date(EPOCH + d * DAY).toLocaleDateString(undefined, { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' }); }catch(e){ return 'day ' + d; } }
   function store(){ try{ return JSON.parse(localStorage.getItem(KEY) || '{}') || {}; }catch(e){ return {}; } }
   function remember(k, v){ var s = store(); s[k] = v; try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  function forget(k){ var s = store(); delete s[k]; try{ localStorage.setItem(KEY, JSON.stringify(s)); }catch(e){} }
+  function unsent(){ var s = store(); return batch.filter(function(c){ return !s[c.ns + '.' + c.day]; }); }
 
   /* ---- what the QR code asked for, judged the way the scanner will judge it ---- */
   var asked = (/[#&]c=([A-Z0-9.,a-z]{1,400})/.exec(location.hash) || [])[1] || '';
@@ -68,7 +70,7 @@
     var t0 = Date.now();
     while(Date.now() - t0 < ms){
       var st = ((await conn.getSignatureStatuses([sig])) || {}).value; st = st && st[0];
-      if(st){ if(st.err) throw new Error('failed on-chain'); if(st.confirmationStatus === 'confirmed' || st.confirmationStatus === 'finalized') return true; }
+      if(st){ if(st.err){ var bad = new Error('A claim failed on-chain; its fee was not kept. Press the button to try it again.'); bad.onchain = true; throw bad; } if(st.confirmationStatus === 'confirmed' || st.confirmationStatus === 'finalized') return true; }
       await delay(1500);
     }
     return false;
@@ -129,13 +131,23 @@
         say('Sending ' + (i + 1) + ' of ' + signed.length + '…');
         var sig = await conn.sendRawTransaction(signed[i].serialize(), { skipPreflight: false });
         remember(c.ns + '.' + c.day, { sig: sig, wallet: wallet, at: Date.now() });      /* never pay a fee twice for one claim */
-        var ok = await confirm(conn, sig, 30000);
+        var ok;
+        try{ ok = await confirm(conn, sig, 30000); }
+        catch(e){                           /* failed ON-CHAIN: the claim is still open. A lost connection is NOT that: the
+                                               transaction may still land, so it stays remembered and is never signed twice. */
+          if(e && e.onchain){ forget(c.ns + '.' + c.day); if(li) li.textContent = GAMES[c.ns] + ' — ' + dayName(c.day) + ' ✗ failed, no fee kept'; }
+          throw e; }
         if(li) li.textContent = GAMES[c.ns] + ' — ' + dayName(c.day) + (ok ? ' ✓ collected' : ' … sent, still confirming');
       }
       say('Done. Your $OIL arrives with the next weekly rewards payout.');
+      /* the button goes: pressing it again would sign the SAME claims, pay the fee and be refused as a duplicate
+         (seen on the Founder's first live claim, 2026-10-22) */
+      btn.hidden = true; btn.remove();
+      batch = []; return;
     }catch(e){
       say((e && e.message) || 'Something went wrong. Nothing was sent unless a line above says collected.', true);
-      btn.disabled = false;
+      batch = unsent();                     /* what was sent stays sent: the button now offers only the rest */
+      if(batch.length) btn.disabled = false; else btn.remove();
     }
   }
 

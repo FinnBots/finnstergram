@@ -253,6 +253,7 @@ var FB_QR = (function(){
   return { encode: encode, svg: svg, _rsEc: rsEc, _formatBits: formatBits, _versionBits: versionBits, _codewords: codewords };
 })();
 var FB_E1_GAMES = {"BWRD":"BOTWORD","CN4B":"CONNECTBOT","SUDO":"SUDOBOT"};
+var FB_E1_TERMS = {"lamports":2500000,"reward":5,"window_days":7};
 /* ==========================================================================
    FinnBots FAMILY REPORT — the grown-ups' view on finnstergram.com/parents/.
    PARENTS-AND-OIL-BRIEF.md Phase 1 (P1).
@@ -417,7 +418,7 @@ var FB_E1_GAMES = {"BWRD":"BOTWORD","CN4B":"CONNECTBOT","SUDO":"SUDOBOT"};
    there, in Phantom. This page signs nothing, holds no wallet code and sends nothing anywhere.
    ========================================================================== */
 (function(){
-  var C = window.FB_FAMILY_CODEC, Q = window.FB_QR, G = window.FB_E1_GAMES || {};
+  var C = window.FB_FAMILY_CODEC, Q = window.FB_QR, G = window.FB_E1_GAMES || {}, TERMS = window.FB_E1_TERMS || {};
   var root = document.getElementById('fb-e1-collect');
   if(!C || !Q || !root) return;
 
@@ -453,7 +454,9 @@ var FB_E1_GAMES = {"BWRD":"BOTWORD","CN4B":"CONNECTBOT","SUDO":"SUDOBOT"};
     var ul = el('ul', 'fam-cleared');
     list.forEach(function(c){ ul.appendChild(el('li', null, (G[c.ns] || c.ns) + ' — ' + dayName(c.day))); });
     box.appendChild(ul);
-    box.appendChild(el('p', null, 'Each one can be collected once, within 7 days, for 5 $OIL. Collecting costs 0.005 SOL each, paid from your wallet; the $OIL arrives with the next weekly rewards payout.'));
+    /* the terms come from templates/e1-terms.json (the same file the claim page reads) — never typed here */
+    box.appendChild(el('p', null, 'Each one can be collected once, within ' + TERMS.window_days + ' days, for ' + TERMS.reward +
+      ' $OIL. Collecting costs ' + (TERMS.lamports / 1e9) + ' SOL each, paid from your wallet; the $OIL arrives with the next weekly rewards payout.'));
     var btn = el('button', 'btn btn-amber', 'For grown-ups: show the collect code'); btn.type = 'button';
     btn.addEventListener('click', function(){ ask(box, list, btn); });
     box.appendChild(btn);
