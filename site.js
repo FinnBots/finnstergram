@@ -459,7 +459,10 @@
     function show(i) {
       at = (i + order.length) % order.length;
       var g = order[at];
-      gotd.href = g.url;
+      /* the box opens the game's PAGE; only Play now plays the game (the rule every card follows) */
+      var open = $('[data-gotd-open]', gotd), go = $('[data-gotd-play]', gotd);
+      if (open) open.href = g.page;
+      if (go) { go.href = g.url; go.setAttribute('aria-label', 'Play ' + g.name.toUpperCase() + ' now'); }
       var bg = $('[data-spot-bg]', wrap); if (bg) bg.style.backgroundImage = 'url(' + (g.shot || '/assets/bots/' + g.bot + '.png') + ')';
       var how = $('[data-gotd-how]', wrap); if (how) how.href = g.page;
       $('[data-gotd-label]', gotd).textContent = at === 0 ? 'Game of the day' : 'Spotlight';
@@ -502,16 +505,17 @@
     var picks = recentList().map(function (u) { return by[u]; }).filter(Boolean).slice(0, 4);
     if (!picks.length) return;
     var grid = $('[data-recent-grid]', recent);
-    picks.forEach(function (g) {                       // a compact shortcut: picture + name play it; "How to play" opens its page
+    picks.forEach(function (g) {                       // like every card: picture + name open its PAGE, Play now plays it
       var card = d.createElement('div'); card.className = 'panel recent-card';
-      var a = d.createElement('a'); a.className = 'recent-play'; a.href = g.url;
+      var a = d.createElement('a'); a.className = 'recent-open'; a.href = g.page;
       var img = d.createElement('img'); img.width = 640; img.height = 480; img.loading = 'lazy'; img.alt = '';
       img.setAttribute('aria-hidden', 'true');
       if (g.shot) img.src = g.shot; else { img.className = 'px'; img.src = '/assets/bots/' + g.bot + '.png'; }
       var nm = d.createElement('b'); nm.textContent = g.name;
       a.appendChild(img); a.appendChild(nm);
-      var how = d.createElement('a'); how.className = 'recent-how'; how.href = g.page; how.textContent = 'How to play →';
-      card.appendChild(a); card.appendChild(how); grid.appendChild(card);
+      var go = d.createElement('a'); go.className = 'recent-quick btn btn-amber btn-sm'; go.href = g.url; go.textContent = '\u25B6 Play now';
+      go.setAttribute('aria-label', 'Play ' + g.name.toUpperCase() + ' now');
+      card.appendChild(a); card.appendChild(go); grid.appendChild(card);
     });
     recent.hidden = false;
   }).catch(function () {});
