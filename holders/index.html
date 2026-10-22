@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="fb-build" content="6e5162fcf78d">
+<meta name="fb-build" content="0c9f5796016f">
 <title>Holder Dashboard — FinnBots</title>
 <meta name="description" content="Connect your wallet to see your $OIL balance, your FinnBots and what they earn each day. Read-only: nothing is ever signed.">
 <link rel="canonical" href="https://finnstergram.com/holders/">
@@ -132,6 +132,19 @@
     </div>
   </section>
 
+<!-- fb:sinks -->
+  <section class="section" aria-labelledby="sinks-title">
+    <div class="wrap">
+      <h2 class="section-title" id="sinks-title">Spend $OIL</h2>
+      <p>This dashboard never asks you to sign. These two pages do, for a payment you choose:</p>
+      <div class="grid-2">
+        <a class="panel link-card" href="/holders/name/"><b>A cabinet name</b><span>Your name on the leaderboards this season, from a fixed list of robot words. 10 $OIL.</span></a>
+        <a class="panel link-card" href="/holders/fund/"><b>The build fund</b><span>Toward the next free level pack or game, for everyone. <span data-fund-line>Totals load here.</span></span></a>
+      </div>
+    </div>
+  </section>
+  <script>(function(){var l=document.querySelector('[data-fund-line]');if(!l||!window.fetch)return;fetch('/assets/funds.json',{cache:'no-store'}).then(function(r){if(!r.ok)throw 0;return r.json();}).then(function(j){if(!j.updated){l.textContent='Totals are not published yet.';return;}var f=(j.funds||[]).filter(function(x){return x.open;})[0];if(!f){l.textContent='No fund is open right now.';return;}l.textContent=f.raised.toLocaleString('en-GB')+' of '+f.target.toLocaleString('en-GB')+' $OIL raised for '+f.title+'.';}).catch(function(){l.textContent='';});})();</script>
+<!-- /fb:sinks -->
   <section class="section band" aria-labelledby="earn-title">
     <div class="wrap story">
       <div class="story-text">
