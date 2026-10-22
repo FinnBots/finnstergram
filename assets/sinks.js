@@ -132,8 +132,7 @@ if(typeof module !== 'undefined' && module.exports) module.exports = FB_CABINET_
   function renderName(){
     root.appendChild(el('p', null, 'Pick a name for your cabinet on the FinnBots leaderboards this season (' + season +
       '). It shows in place of your wallet address on every board you play. ' + CFG.nameFee + ' $OIL; a new season starts each month.'));
-    root.appendChild(el('p', 'quiet', 'Names come from a fixed list of robot words, so nothing on a board can be rude or personal. ' +
-      'Free players can pick from the same list on their own device, for nothing.'));
+    root.appendChild(el('p', 'quiet', 'Names come from a fixed list of robot words, so nothing on a board can be rude or personal.'));
     var go = el('button', 'btn btn-amber', 'Connect Phantom to see your names'); go.type = 'button'; go.id = 'sink-connect';
     root.appendChild(go); root.appendChild(status);
     go.addEventListener('click', async function(){
