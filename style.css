@@ -242,7 +242,7 @@ html:not(.js) .parade { display: none; }
 .card-foot { display: flex; flex-wrap: wrap; gap: var(--s3); align-items: center; }
 .card h3 { font-size: 38px; }
 /* the label above a card title is one fixed height, pill or plain, so every title sits on the same line */
-.card-body > .pill, .card .kicker { align-self: flex-start; min-height: 24px; display: inline-flex; align-items: center; margin-bottom: calc(var(--s1) * -1); }
+.card-body > .pill, .card-body > .gtag, .card .kicker { align-self: flex-start; min-height: 24px; display: inline-flex; align-items: center; margin-bottom: calc(var(--s1) * -1); }
 .card .kicker { font-size: 12.5px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
 .card p { margin: 0; }
 .more { margin-top: 4px; font-weight: 700; color: var(--link); text-decoration: none; }
