@@ -445,15 +445,33 @@
   /* ---- Games: the Game of the day and "New" badges ------------------------------ */
   /* Every card is in the page without the script. The page carries a fixed Featured pick; this turns it
      into today's Game of the day — the same game for everyone on a UTC day, from /assets/games.json. */
-  var gotd = $('[data-gotd]');
-  if (gotd) fetch('/assets/games.json').then(function (r) { if (!r.ok) throw new Error('games ' + r.status); return r.json(); }).then(function (list) {
+  /* TODAY'S GAME: one of the starting six ("start" 1-6 in /assets/games.json), by UTC day — the same day boundary as
+     every game's daily challenge, so the homepage's game is the one everyone gets today (Founder 2026-10-27, brief 1).
+     The /games/ spotlight opens on the same game. */
+  function todayOf(list) {
+    var six = list.filter(function (g) { return g.start > 0; }).sort(function (a, b) { return a.start - b.start; });
+    return six.length ? six[Math.floor(Date.now() / 864e5) % six.length] : null;
+  }
+  var gotd = $('[data-gotd]'), today = $('[data-today]'), gamesList = null;
+  if (gotd || today) gamesList = fetch('/assets/games.json').then(function (r) { if (!r.ok) throw new Error('games ' + r.status); return r.json(); });
+  /* the homepage's ONE TAP: the file carries starter #1; this makes it today's. Play goes straight to the game. */
+  if (today) gamesList.then(function (list) {
+    var g = todayOf(list); if (!g) return;
+    var tPlay = $('[data-today-play]', today), tOpen = $('[data-today-open]', today);
+    if (tPlay) { tPlay.href = g.url; tPlay.setAttribute('aria-label', 'Play today\'s game: ' + g.name.toUpperCase()); }
+    if (tOpen) tOpen.href = g.page;
+    $('[data-today-name]', today).textContent = g.name;
+    $('[data-today-desc]', today).textContent = g.desc;
+  }).catch(function () { /* starter #1 stays */ });
+  if (gotd) gamesList.then(function (list) {
     if (!list.length) return;
     /* today's game first, then every other game in list order — and it ROTATES (Founder 2026-10-17: "the hero game
        needs to rotate to other games"). Pauses while hovered or focused, or when the tab is hidden; never moves by
        itself for someone who turned motion off (the buttons still work). */
     list = list.filter(function (g) { return !g.prize; });   // prize games are never featured (Founder, 2026-10-18)
     if (!list.length) return;
-    var start = Math.floor(Date.now() / 864e5) % list.length, at = 0, timer = null, held = false;
+    var start = list.indexOf(todayOf(list)), at = 0, timer = null, held = false;
+    if (start < 0) start = Math.floor(Date.now() / 864e5) % list.length;   // no starting six: every game in turn
     var order = list.slice(start).concat(list.slice(0, start));
     var wrap = gotd.closest('[data-spot-wrap]') || gotd.parentNode, art = $('.game-art', gotd), count = $('[data-spot-count]', wrap);
     function show(i) {

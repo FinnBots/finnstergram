@@ -165,6 +165,20 @@ html:not(.js) .theme-switch { display: none; }          /* it needs the script; 
 .lede { font-size: clamp(18px, 2.2vw, 21px); margin: 22px 0 0; max-width: 34ch; }
 .lede + p { color: var(--muted); margin: 10px 0 0; max-width: 42ch; }
 .cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 30px; }
+/* PLAY TODAY'S GAME — the homepage's one tap (brief 1, 2026-10-27): the biggest thing on the page after the title, and it
+   goes straight to the game. Under it, which game today is and what you do in it. */
+.today { margin-top: 26px; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; }
+.btn-today { font: 400 clamp(30px, 4vw, 40px)/1 var(--font-display); letter-spacing: .5px; padding: 16px 30px; border-radius: 14px;
+  box-shadow: 6px 6px 0 0 var(--edge); min-height: 64px; }
+.btn-today:hover { box-shadow: 7px 7px 0 0 var(--edge); }
+.btn-today:active { box-shadow: 2px 2px 0 0 var(--edge); }
+.today-line { margin: 0; max-width: 40ch; color: var(--muted); }
+.today-tag { display: inline-block; font-weight: 700; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase;
+  background: var(--amber); color: #2a2230; border-radius: 6px; padding: 2px 7px; margin-right: 4px; vertical-align: 1px; }
+.today-open { color: var(--ink); text-decoration: none; }
+.today-open b { text-transform: uppercase; }
+.today-open:hover b { text-decoration: underline; }
+.section-head-more { margin-top: var(--s7); margin-bottom: var(--s5); align-items: center; }
 
 /* the CRT screen that holds a Bot */
 .screen-wrap { position: relative; }
@@ -199,7 +213,8 @@ html:not(.js) .theme-switch { display: none; }          /* it needs the script; 
 @media (max-width: 760px) {
   .hero .wrap { grid-template-columns: 1fr; }
   .hero .screen-wrap { width: 100%; order: -1; }
-  .hero .screen { max-width: 240px; }
+  .hero .screen { max-width: 160px; }   /* smaller on a phone, so Play today's game sits above the fold */
+  .btn-today { width: 100%; }
   .hero .bubble { right: auto; left: 150px; top: -10px; max-width: 190px; }
 }
 
