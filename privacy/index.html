@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'sha256-n72gdsGKa0QBoIvi13S0zQgbnvWVIcdYR+g1CYTrsPI=' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://arweave.net https://*.arweave.net; font-src 'self'; connect-src 'self' https://finnbots-rpc.mart-kin1000.workers.dev https://cloudflareinsights.com; object-src 'none'; base-uri 'none'; form-action 'self'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
 <meta name="referrer" content="strict-origin-when-cross-origin">
-<meta name="fb-build" content="eb03aaa21fee">
+<meta name="fb-build" content="94db3afea628">
 <title>Privacy — FinnBots</title>
 <meta name="description" content="What FinnBots counts, what stays on your device, and what happens when a grown-up uses a crypto wallet.">
 <link rel="canonical" href="https://finnstergram.com/privacy/">
@@ -63,53 +63,52 @@
     <div class="wrap">
       <div class="panel" data-reveal>
         <h2 id="short-h">The short version</h2>
-        <p>FinnBots is made by a dad and his daughter, and many of our players are children. We do not ask for a name, an email address or an account, and we never sell or share anything about you. Here is everything that leaves your device, and why.</p>
+        <p>No accounts, names, emails, ads or tracking cookies. We never sell anything about you. This page lists everything that leaves your device.</p>
       </div>
     </div>
   </section>
   <section class="section" id="visits" aria-labelledby="visits-h">
     <div class="wrap">
       <div class="panel" data-reveal>
-        <h2 id="visits-h">Counting visits to the site</h2>
-        <p>Page views on finnstergram.com are counted with <strong>Cloudflare Web Analytics</strong>. It uses no cookies and does not identify you. We see totals: how many visits, which pages, which country and what kind of device.</p>
+        <h2 id="visits-h">Visits</h2>
+        <p>The site and the games count visits with <strong>Cloudflare Web Analytics</strong>: no cookies, no ID. We see totals only: pages, country, device type and the site a visitor came from.</p>
       </div>
     </div>
   </section>
   <section class="section" id="games" aria-labelledby="games-h">
     <div class="wrap">
       <div class="panel" data-reveal>
-        <h2 id="games-h">Counting how the games are played</h2>
-        <p>Each game keeps a few <strong>counts</strong> in your browser: how many times it was opened, how many runs were finished, and how many times the paid panel was opened. <strong>Once a day</strong> it sends those counts to us, with the kind of device (phone, tablet or laptop). Cloudflare, which carries the request, tells us the country it came from.</p>
-        <p>The counts carry <strong>no name, no ID and no cookie</strong>, so we cannot tell one player from another or follow anyone between games. We use them only to see which games are played and what to improve.</p>
+        <h2 id="games-h">Play counts</h2>
+        <p>Once a day, each game sends us a few totals from your browser: visits, finished runs, times the paid panel opened, and the device type (phone, tablet or laptop). There is no name, ID or cookie, so we cannot tell players apart. Our server uses your IP address only to block floods of requests and does not store it.</p>
       </div>
     </div>
   </section>
   <section class="section" id="device" aria-labelledby="device-h">
     <div class="wrap">
       <div class="panel" data-reveal>
-        <h2 id="device-h">What stays on your device</h2>
-        <p>Your best scores, the "What's been played on this device" record on the <a href="/parents/">parents page</a>, and settings such as night mode are kept in your browser. They are never sent to us. Night mode is remembered in one small cookie on finnstergram.com so it carries from the site into the games; it holds only "dark" or "light". You can clear all of it by clearing this site's data in your browser, or with "Clear this record" on the parents page.</p>
+        <h2 id="device-h">Kept on your device</h2>
+        <p>Best scores, the play record on the <a href="/parents/">parents page</a> and settings stay in your browser and are never sent to us. Night mode is one cookie, holding "dark" or "light", so it carries across finnstergram.com. To clear them, clear this site's data, or use "Clear this record" on the parents page.</p>
       </div>
     </div>
   </section>
   <section class="section" id="wallet" aria-labelledby="wallet-h">
     <div class="wrap">
       <div class="panel" data-reveal>
-        <h2 id="wallet-h">If a grown-up uses a crypto wallet</h2>
-        <p>Ranked runs and rewards use a Solana wallet such as Phantom. Anything done with a wallet is written to the <strong>public Solana blockchain</strong>, where anyone can see it: the wallet address, the payment and the score it posted. Our leaderboards show a shortened wallet address (like <code>Ab12…9xYz</code>) or a cabinet name the wallet owner chose, with the score.</p>
-        <p>We never see or store a seed phrase or private key, and we never ask for one. Wallet requests go through our own server to a Solana network provider (Helius), which handles them like any blockchain request.</p>
+        <h2 id="wallet-h">Crypto wallets (grown-ups only)</h2>
+        <p>Anything done with a wallet (payments, scores, rewards) is recorded on the <strong>public Solana blockchain</strong>. Anyone can see it, and nobody, including us, can delete it. Leaderboards show a shortened address (<code>Ab12…9xYz</code>) or a robot name the owner picked. We never ask for a seed phrase or private key. Wallet requests go through our server on Cloudflare to Helius, a Solana provider.</p>
       </div>
     </div>
   </section>
   <section class="section" id="others" aria-labelledby="others-h">
     <div class="wrap">
       <div class="panel" data-reveal>
-        <h2 id="others-h">Other services the pages use</h2>
+        <h2 id="others-h">Services we use</h2>
         <ul>
-          <li><strong>GitHub Pages</strong> serves the site and the games.</li>
-          <li><strong>Google Fonts</strong> provides some of the lettering in the games, so your browser asks Google for those font files.</li>
-          <li><strong>Arweave</strong> stores the FinnBot pictures, so your browser loads them from there.</li>
-          <li>Links to <strong>Discord, X, Magic Eden and Tensor</strong> take you to those services, which have their own privacy policies.</li>
+          <li><strong>GitHub Pages</strong> hosts the site and games.</li>
+          <li><strong>Cloudflare</strong> runs our domain, visit counting and server.</li>
+          <li><strong>Google Fonts</strong> serves some game lettering.</li>
+          <li><strong>Arweave</strong> stores the FinnBot pictures.</li>
+          <li>Links to <strong>Discord, X, Magic Eden and Tensor</strong> lead to services with their own privacy policies.</li>
         </ul>
       </div>
     </div>
@@ -118,7 +117,7 @@
     <div class="wrap">
       <div class="panel" data-reveal>
         <h2 id="children-h">Children</h2>
-        <p>Children can play every game for free without telling us anything. There is no chat and no way to contact other players. Nothing can be bought without a crypto wallet, which a child would need an adult to set up. If you think we hold something about your child that we should not, tell us and we will remove it.</p>
+        <p>Children can play every game free without telling us anything. There is no chat and no way to contact other players. Nothing can be spent without a grown-up's wallet. We hold nothing that identifies a child. Our Discord follows Discord's own minimum age of 13.</p>
       </div>
     </div>
   </section>
@@ -126,7 +125,7 @@
     <div class="wrap">
       <div class="panel" data-reveal>
         <h2 id="contact-h">Questions</h2>
-        <p>Message us on <a href="https://discord.gg/fAHCyckqyn">Discord</a> or <a href="https://x.com/FinnBots">X</a>, or see the <a href="/contact-us/">contact page</a>. If this policy changes, the date at the top changes with it.</p>
+        <p>Ask on <a href="https://discord.gg/fAHCyckqyn">Discord</a> or <a href="https://x.com/FinnBots">X</a>, or use the <a href="/contact-us/">contact page</a>. If this policy changes, so does the date at the top.</p>
       </div>
     </div>
   </section>
