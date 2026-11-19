@@ -1,0 +1,13 @@
+{
+ "updated": "2026-11-16T01:25:39Z",
+ "funds": [
+  {
+   "id": "F1",
+   "title": "BotFord: The Deep Caves (10 new caves)",
+   "kind": "level pack",
+   "target": 1000,
+   "open": true,
+   "raised": 100
+  }
+ ]
+}
