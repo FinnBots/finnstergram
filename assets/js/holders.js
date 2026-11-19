@@ -9,7 +9,7 @@
      any number with Bot #12's picture, so the old page showed a stranger's Bot for #1640 and #2984. */
 (function () {
   'use strict';
-  var RPC = 'https://finnbots-rpc.mart-kin1000.workers.dev';
+  var RPC = 'https://finnbots-rpc.finnstergram.com';
   var OIL_MINT = 'HrcfXJcFdMoLfbkN5qCTSFrLsAgJNHitmwKc5AyS7xzf';
   var TOKEN_PROGRAM = 'TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA';
   var EMISSION_RATE = 10;                      // $OIL per Bot per day
