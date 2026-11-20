@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+<channel>
+  <title>FinnBots — Quick play</title>
+  <link>https://finnstergram.com/games/#quick</link>
+  <description>A quick go — perfect for a minute or two. Free FinnBots games you play in your browser.</description>
+  <language>en</language>
+  <item>
+    <title>Flappy Bot — free tap-to-fly game</title>
+    <link>https://finnstergram.com/games/flappy-bot/</link>
+    <guid isPermaLink="true">https://finnstergram.com/games/flappy-bot/</guid>
+    <pubDate>Thu, 01 Oct 2026 12:00:00 +0000</pubDate>
+    <description>Tap to flap through the gaps — how far can you fly? Free to play in your browser on a phone, tablet or laptop. No download, no sign-up.</description>
+    <enclosure url="https://finnstergram.com/assets/games/flap.jpg" type="image/jpeg" length="9888"/>
+  </item>
+</channel>
+</rss>
