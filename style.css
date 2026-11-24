@@ -711,3 +711,11 @@ a.chip { text-decoration: none; color: inherit; }
 .recent-card:hover { border-color: var(--amber); }
 @media (max-width: 960px) { .recent-row { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 420px) { .recent-open { grid-template-columns: 56px 1fr; gap: var(--s2); } .recent-card img { width: 56px; height: 42px; } .recent-card b { font-size: 18px; } }
+
+/* Search pages: about text + FAQ (2026-11-24) — the page answers what the searcher typed */
+.gp-about { max-width: 760px; }
+.gp-about > p { color: var(--ink); line-height: 1.65; margin: 0 0 14px; }
+details.faq { border-top: 1px solid var(--line); padding: 12px 0; }
+details.faq:last-child { border-bottom: 1px solid var(--line); }
+details.faq summary { cursor: pointer; font-weight: 700; color: var(--heading); }
+details.faq p { margin: 8px 0 0; color: var(--ink); line-height: 1.6; }
