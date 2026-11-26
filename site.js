@@ -593,3 +593,24 @@
       .then(function () { var b = $('.badge', lost); if (b) b.textContent = '#' + n; });
   }).catch(function () { /* keep the local picture */ });
 })();
+
+/* CARRY THE VISITOR'S CHANNEL INTO THE GAME (2026-11-26). A link like finnstergram.com/games/?from=hn tagged only the SITE
+   page: a visitor who then tapped a game arrived there untagged, so the game's play counter credited "the site" and a launch
+   (Show HN, Reddit, TikTok) was invisible in the numbers. Now the tag a visitor arrived with is kept for this visit
+   (sessionStorage) and added to every link into a game (*.finnstergram.com) that has no tag of its own. Only known channel
+   tags pass (the counter's own list); anything else is ignored. */
+(function () {
+  var OK = /^(x|discord|site|parents|holders|email|qr|bsky|tg|itch|masto|tt|rd|hn|share)(-[a-z0-9]{2,10})?$/, tag = '';
+  try { var q = new URLSearchParams(location.search).get('from'); if (q && OK.test(q)) sessionStorage.setItem('fb-from', q); tag = sessionStorage.getItem('fb-from') || ''; } catch (e) {}
+  if (!tag || !OK.test(tag)) return;
+  var into = function (a) {
+    try {
+      var u = new URL(a.href, location.href);
+      if (!/^[a-z0-9-]+\.finnstergram\.com$/.test(u.hostname) || u.searchParams.has('from')) return;
+      u.searchParams.set('from', tag); a.href = u.toString();
+    } catch (e) {}
+  };
+  document.addEventListener('click', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) into(a); }, true);
+  document.addEventListener('auxclick', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) into(a); }, true);
+  document.addEventListener('contextmenu', function (e) { var a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) into(a); }, true);
+})();
